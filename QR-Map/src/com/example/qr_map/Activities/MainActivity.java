@@ -1,4 +1,9 @@
-package com.example.qr_map;
+package com.example.qr_map.Activities;
+
+import com.example.qr_map.R;
+import com.example.qr_map.R.id;
+import com.example.qr_map.R.layout;
+import com.example.qr_map.R.menu;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
