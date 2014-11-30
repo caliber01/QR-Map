@@ -35,6 +35,7 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
+        
         menuItems = this.getResources().getStringArray(R.array.menu_items);
         mListView = (ListView) this.findViewById(R.id.left_drawer);
         mDrawerLayout = (DrawerLayout) this.findViewById(R.id.drawer_layout);
