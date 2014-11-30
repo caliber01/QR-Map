@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/white" >
+    android:background="@drawable/activated_background" >
     <TextView
         android:id="@+id/lab_list_item_number"
         android:layout_width="wrap_content"

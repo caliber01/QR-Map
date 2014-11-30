@@ -26,6 +26,7 @@ public class MainActivity extends ActionBarActivity {
 	private String[] menuItems;
 	private ListView mListView;
 	private DrawerLayout mDrawerLayout;
+	private CharSequence mTitle;
 	
 	private ForMaxTestLabDataAccess data;
 	
@@ -93,7 +94,18 @@ public class MainActivity extends ActionBarActivity {
 		//Меняем старый экран на новый 
 		FragmentTransaction frTrans = this.getSupportFragmentManager().beginTransaction();
         frTrans.replace(R.id.content_frame, fragment);
-        frTrans.commit();}
+        frTrans.commit();
+
+        //Выделяем выбранный и закрываем навменю
+        mListView.setItemChecked(position, true);
+        setTitle(menuItems[position]);
+        mDrawerLayout.closeDrawer(mListView);
+    }
+    @Override
+    public void setTitle(CharSequence title) {
+        mTitle = title;
+        getSupportActionBar().setTitle(mTitle);
+    }
 }
 
 

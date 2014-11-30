@@ -10,6 +10,7 @@ import com.example.qr_map.Models.Room;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import android.widget.SimpleAdapter;
 public class LabListFragment extends Fragment {
 
 	private final String MENU_ITEM_POSITION = "position";
+	private String MY_LOG ="log";
 	
 	private final String ROOM_NUMBER_ATTRIBUTE = "number";
 	private final String ROOM_INFO_ATTRIBUTE = "info";
@@ -51,8 +53,9 @@ public class LabListFragment extends Fragment {
 		HashMap<String,String> m;
 		for(Room r : rooms)
 		{	
+			//Log.i(MY_LOG, r.getNumber());
 			m = new HashMap<String,String>();
-			m.put(ROOM_NUMBER_ATTRIBUTE,r.getNumber());
+			m.put(ROOM_NUMBER_ATTRIBUTE,"301b");
 			m.put(ROOM_INFO_ATTRIBUTE, r.toString());
 			content.add(m);
 		}
