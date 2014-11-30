@@ -62,4 +62,9 @@ public class Sponsor {
 	public void setDescription(String description) {
 		Description = description;
 	}
+	@Override
+	public String toString() {
+		return "Sponsor [Name=" + Name + "]";
+	}
+	
 }

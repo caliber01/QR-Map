@@ -1,13 +1,12 @@
 package com.example.qr_map.Models;
 
-import java.util.List;
 
 public abstract class Room {
 	
 	//private Fields
-	private String Name;
-	private String Number;
-	private String Type;
+	protected String Name;
+	protected String Number;
+	protected String Type;
 	
 	//Accessors
 	public String getName() {
@@ -27,6 +26,5 @@ public abstract class Room {
 	}
 	public void setType(String type) {
 		Type = type;
-	}
-	
+	}	
 }

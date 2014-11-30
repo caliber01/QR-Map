@@ -101,4 +101,14 @@ public class Laboratory extends Room {
 	public void setCathedra(String cathedra) {
 		Cathedra = cathedra;
 	}
+	@Override
+	public String toString() {
+		return "Laboratory [Activity=" + Activity + ", AverageRating="
+				+ AverageRating + ", Sponsor=" + Sponsor + ", Faculty="
+				+ Faculty + ", Cathedra=" + Cathedra +", Name=" + Name + "]";
+	}
+	
+	//Methods
+	
+	
 }
