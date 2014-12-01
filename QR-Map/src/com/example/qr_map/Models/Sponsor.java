@@ -64,7 +64,7 @@ public class Sponsor {
 	}
 	@Override
 	public String toString() {
-		return "Sponsor [Name=" + Name + "]";
+		return Name;
 	}
 	
 }

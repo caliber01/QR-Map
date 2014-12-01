@@ -110,5 +110,4 @@ public class Laboratory extends Room {
 	
 	//Methods
 	
-	
 }

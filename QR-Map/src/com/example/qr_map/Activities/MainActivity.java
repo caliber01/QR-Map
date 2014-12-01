@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.example.qr_map.R;
@@ -27,6 +28,7 @@ public class MainActivity extends ActionBarActivity {
 	private ListView mListView;
 	private DrawerLayout mDrawerLayout;
 	private CharSequence mTitle;
+	private LinearLayout mSideLinearLayout;
 	
 	private ForMaxTestLabDataAccess data;
 	
@@ -37,8 +39,9 @@ public class MainActivity extends ActionBarActivity {
         
         
         menuItems = this.getResources().getStringArray(R.array.menu_items);
-        mListView = (ListView) this.findViewById(R.id.left_drawer);
+        mListView = (ListView) this.findViewById(R.id.lv_drawer);
         mDrawerLayout = (DrawerLayout) this.findViewById(R.id.drawer_layout);
+        mSideLinearLayout = (LinearLayout) this.findViewById(R.id.linear_drawer);
         
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,menuItems);
         mListView.setAdapter(adapter);
@@ -100,7 +103,7 @@ public class MainActivity extends ActionBarActivity {
         //Выделяем выбранный и закрываем навменю
         mListView.setItemChecked(position, true);
         setTitle(menuItems[position]);
-        mDrawerLayout.closeDrawer(mListView);
+        mDrawerLayout.closeDrawer(mSideLinearLayout);
     }
     @Override
     public void setTitle(CharSequence title) {
