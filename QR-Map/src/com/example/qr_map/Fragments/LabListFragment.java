@@ -43,7 +43,7 @@ public class LabListFragment extends Fragment {
 		recView.setAdapter(adapter);
 		return frag;
 	}
-	
+	public void someMethod(){}
 	public class LabAdapter extends RecyclerView.Adapter<LabViewHolder> 
 	{
 		private List<Room> labList;
@@ -63,8 +63,9 @@ public class LabListFragment extends Fragment {
 		public void onBindViewHolder(LabViewHolder labViewHolder, int position) {
 			// TODO Auto-generated method stub
 			Laboratory lab = (Laboratory)labList.get(position);
-			labViewHolder.vInfo.setText(lab.toString());
+			labViewHolder.vName.setText(lab.getName());
 			labViewHolder.vNumber.setText("310b");//lab.getNumber());
+			labViewHolder.vSponsor.setText(lab.getSponsor().toString());
 		}
 
 		@Override
@@ -80,13 +81,14 @@ public class LabListFragment extends Fragment {
 	public class LabViewHolder extends RecyclerView.ViewHolder
 	{
 		protected TextView vNumber;
-		protected TextView vInfo;
-		
+		protected TextView vName;
+		protected TextView vSponsor;
 		public LabViewHolder(View v)
 		{
 			super(v);
 			vNumber =  (TextView) v.findViewById(R.id.lab_number);
-			vInfo = (TextView) v.findViewById(R.id.lab_info);
+			vName = (TextView) v.findViewById(R.id.lab_name);
+			vSponsor = (TextView) v.findViewById(R.id.lab_sponsor);
 		}
 	}
 }
