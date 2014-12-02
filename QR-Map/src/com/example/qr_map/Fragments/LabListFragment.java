@@ -6,9 +6,12 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.qr_map.R;
@@ -41,6 +44,7 @@ public class LabListFragment extends Fragment {
 		ForMaxTestLabDataAccess data = new ForMaxTestLabDataAccess();
 		LabAdapter adapter = new LabAdapter(data.GetAll());
 		recView.setAdapter(adapter);
+		
 		return frag;
 	}
 	public void someMethod(){}
