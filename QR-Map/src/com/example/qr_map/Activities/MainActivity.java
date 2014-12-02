@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -37,6 +38,9 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
+        ActionBar ab = this.getSupportActionBar();
+        ab.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
+        ab.setDisplayHomeAsUpEnabled(true);
         
         menuItems = this.getResources().getStringArray(R.array.menu_items);
         mListView = (ListView) this.findViewById(R.id.lv_drawer);

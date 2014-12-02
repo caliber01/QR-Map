@@ -2,8 +2,9 @@
 <resources>
 
     <string name="app_name">QR Map</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Настройки</string>
 	<string name="lab_sponsor_title">Спонсор:</string>
+	<string name="action_search">Поиск</string>
     <string-array name="menu_items">
         <item>Лабаратории</item>
         <item>Избранное</item>

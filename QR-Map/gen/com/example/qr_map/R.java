@@ -1780,6 +1780,12 @@ containing a value of this type.
         public static final int activated_background=0x7f020033;
         public static final int ic_launcher=0x7f020034;
         public static final int ic_menu_white=0x7f020035;
+        public static final int ic_menu_white_18dp=0x7f020036;
+        public static final int ic_menu_white_24dp=0x7f020037;
+        public static final int ic_search_white_18dp=0x7f020038;
+        public static final int ic_search_white_24dp=0x7f020039;
+        public static final int ic_search_white_36dp=0x7f02003a;
+        public static final int ic_search_white_48dp=0x7f02003b;
     }
     public static final class id {
         public static final int action_bar=0x7f0a0031;
@@ -1790,12 +1796,12 @@ containing a value of this type.
         public static final int action_bar_subtitle=0x7f0a001f;
         public static final int action_bar_title=0x7f0a001e;
         public static final int action_context_bar=0x7f0a0032;
-        public static final int action_menu=0x7f0a0049;
         public static final int action_menu_divider=0x7f0a0005;
         public static final int action_menu_presenter=0x7f0a0006;
         public static final int action_mode_bar=0x7f0a002e;
         public static final int action_mode_bar_stub=0x7f0a002d;
         public static final int action_mode_close_button=0x7f0a0020;
+        public static final int action_search=0x7f0a0049;
         public static final int action_settings=0x7f0a004a;
         public static final int activity_chooser_view_content=0x7f0a0021;
         public static final int always=0x7f0a0014;
@@ -1974,6 +1980,7 @@ containing a value of this type.
         /**  Content description for the Toolbar icon used to collapse an expanded action mode. [CHAR LIMIT=NONE] 
          */
         public static final int abc_toolbar_collapse_description=0x7f0b0004;
+        public static final int action_search=0x7f0b0013;
         public static final int action_settings=0x7f0b0011;
         public static final int app_name=0x7f0b0010;
         public static final int lab_sponsor_title=0x7f0b0012;

@@ -4,9 +4,9 @@
     tools:context="com.example.qr_map.MainActivity" >
 
     <item
-        android:id="@+id/action_menu"
-        android:title="@string/action_settings"
-        android:icon="@drawable/ic_menu_white"
+        android:id="@+id/action_search"
+        android:title="@string/action_search"
+        android:icon="@drawable/ic_search_white_24dp"
         app:showAsAction="ifRoom"
         />
     
