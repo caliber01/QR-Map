@@ -17,9 +17,9 @@ public class ForMaxTestLabDataAccess implements ILabDataAccess {
 		for(int i = 0; i< 30; i++)
 		{
 			Laboratory lab = new Laboratory(
-					"Physics 3"+i,
+					"Физическая лабаратория",
 					new Sponsor(),
-					"09438273",
+					"132",
 					"Computer class",
 					"Computer sciences",
 					"Programming",
@@ -29,7 +29,7 @@ public class ForMaxTestLabDataAccess implements ILabDataAccess {
 					"Physics",
 					3.5
 					);
-			lab.setName("Physics 3"+i);
+			lab.getSponsor().setName("Global Logic");
 			labs.add(lab);
 		}
 	}

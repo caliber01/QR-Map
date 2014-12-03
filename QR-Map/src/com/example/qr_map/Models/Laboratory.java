@@ -29,12 +29,24 @@ public class Laboratory extends Room {
 			String _Faculty,
 			String _Cathedra,
 			String _ChiefFIO,
-			List<String> _LabAssisatantsFIOs,
+			List<String> _LabAssistantsFIOs,
 			String _WorkTime,
 			String _Activity,
 			double _AverageRating
 			)
 	{
+		Name = _Name;
+		Sponsor = _Sponsor;
+		Number = _Number;
+		Type = _Type;
+		Faculty = _Faculty;
+		Cathedra = _Cathedra;
+		ChiefFIO = _ChiefFIO;
+		LabAssistantsFIOs = _LabAssistantsFIOs;
+		WorkTime = _WorkTime;
+		Activity = _Activity;
+		AverageRating = _AverageRating;
+		
 		
 	}
 
@@ -109,6 +121,5 @@ public class Laboratory extends Room {
 	}
 	
 	//Methods
-	
 	
 }
