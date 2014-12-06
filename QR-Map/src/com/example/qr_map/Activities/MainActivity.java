@@ -37,7 +37,9 @@ public class MainActivity extends ActionBarActivity {
 	private String DR_ICON = "icon";
 	
 	private String[] menuItems;
-	private int[] menuIcons = {R.drawable.ic_list_grey600_36dp,R.drawable.ic_star_rate_grey600_36dp,R.drawable.ic_history_grey600_36dp};;
+	private int[] menuIcons = {R.drawable.ic_list_grey600_36dp,
+			R.drawable.ic_star_rate_grey600_36dp,
+			R.drawable.ic_history_grey600_36dp};
 	private ListView mListView;
 	private DrawerLayout mDrawerLayout;
 	private CharSequence mTitle;
@@ -80,6 +82,11 @@ public class MainActivity extends ActionBarActivity {
         String[] from = {DR_TEXT,DR_ICON};
         int[] to = {R.id.drawer_text,R.id.drawer_icon};
         SimpleAdapter adapter = new SimpleAdapter(this,data,R.layout.drawer_list_item,from,to);
+        
+        
+        //Creating header  and footer
+        View header = getLayoutInflater().inflate(R.layout.drawer_header, null);
+        mListView.addHeaderView(header);
         mListView.setAdapter(adapter);
         
 
