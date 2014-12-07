@@ -185,14 +185,31 @@ public class DataAccess implements ILabDataAccess
 
 	@Override
 	public void RemoveFromFavourites(String roomNumber) {
-		
+		try{
+			LocalHelper.removeFromQueue(filenameFavourites,roomNumber);
+			}
+			catch(Exception e)
+			{
+				
+			}
 
 	}
 	
 	@Override
 	public List<Room> GetFavourites() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList listLabs = new ArrayList();
+		PriorityQueue q = LocalHelper.readQueue(filenameFavourites);
+		while(q.isEmpty())
+		{
+			String s = (String)q.poll();
+			Laboratory lab = new Laboratory();
+			lab = GetRoom(s);
+			if(lab != null)
+			{
+				listLabs.add(lab);
+			}
+		}
+		return listLabs;
 	}
 
 	@Override
@@ -200,9 +217,6 @@ public class DataAccess implements ILabDataAccess
 		// TODO Auto-generated method stub
 
 	}
-
-	
-	
 	@Override
 	public void UpdateInfoFromServer() {
 		// TODO Auto-generated method stub

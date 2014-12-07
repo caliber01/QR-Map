@@ -68,5 +68,14 @@ public class LocalHelper {
 		q.add(value);
 		writeQueue(fileName,q);
 	}
+	public static void removeFromQueue(String fileName,String value)throws Exception
+	{
+		PriorityQueue q = readQueue(fileName);
+		if(!q.isEmpty())
+		{
+		q.remove(value);
+		writeQueue(fileName,q);
+		}
+	}
 
 }
