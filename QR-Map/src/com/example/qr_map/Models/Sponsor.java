@@ -27,7 +27,7 @@ public class Sponsor {
 		Description = _Description;
 		
 	}
-	//Accessors
+	
 	public String getName() {
 		return Name;
 	}

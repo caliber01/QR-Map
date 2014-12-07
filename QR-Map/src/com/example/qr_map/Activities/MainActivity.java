@@ -27,7 +27,6 @@ import com.example.qr_map.Fragments.CameraFragment;
 import com.example.qr_map.Fragments.LabListFragment;
 import com.example.qr_map.Logic.ForMaxTestLabDataAccess;
 
-
 public class MainActivity extends ActionBarActivity {
 
 	private String MY_LOG ="log";
