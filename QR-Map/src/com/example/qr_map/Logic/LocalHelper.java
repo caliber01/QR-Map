@@ -38,7 +38,7 @@ public class LocalHelper {
 		write(fileName,st);
 	}
 	
-	//favoritessssss
+	//favorites
 	public static PriorityQueue readQueue (String fileName)
 	{
 		PriorityQueue q = null;
