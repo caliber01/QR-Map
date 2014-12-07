@@ -139,33 +139,60 @@ public class DataAccess implements ILabDataAccess
 		return FindBySmth("Number = ?",new String[] {_Number});
 	}
 	
-	String filenameHistory = "History.os";
-	String filename = "History.os";
+	String filenameHistory = "/History.os";
+	String filenameFavourites = "/Favourites.os";
 	
 	
 	@Override
 	public void AddToHistory(String roomId) {
-		
-		//LocalHelper.add(filenameHistory,roomId);
+		try{
+		LocalHelper.add(filenameHistory,roomId);
+		}
+		catch(Exception e)
+		{
+			
+		}
 		
 	}
-
 	@Override
 	public List<Room> GetHistory() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList listLabs = new ArrayList();
+		Stack<String> st = LocalHelper.read(filenameHistory);
+		while(st.empty())
+		{
+			String s = st.pop();
+			Laboratory lab = new Laboratory();
+			lab = GetRoom(s);
+			if(lab != null)
+			{
+				listLabs.add(lab);
+			}
+		}
+		return listLabs;
 	}
 
 	@Override
 	public void AddToFavourites(String roomNumber) {
-		// TODO Auto-generated method stub
+		try{
+			LocalHelper.addToQueue(filenameFavourites,roomNumber);
+			}
+			catch(Exception e)
+			{
+				
+			}
 
 	}
 
 	@Override
 	public void RemoveFromFavourites(String roomNumber) {
-		// TODO Auto-generated method stub
+		
 
+	}
+	
+	@Override
+	public List<Room> GetFavourites() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
@@ -174,11 +201,7 @@ public class DataAccess implements ILabDataAccess
 
 	}
 
-	@Override
-	public List<Room> GetFavourites() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 	
 	@Override
 	public void UpdateInfoFromServer() {

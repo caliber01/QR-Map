@@ -3,43 +3,70 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.HashSet;
+import java.util.*;
 
 public class LocalHelper {
-	//SharedPreferences sPref;
-	
-	/*void saveText() {
-	    sPref = getPreferences(MODE_PRIVATE);
-	    Editor ed = sPref.edit();
-	    ed.putString(SAVED_TEXT, etText.getText().toString());
-	    ed.commit();
-	    Toast.makeText(this, "Text saved", Toast.LENGTH_SHORT).show();
-	  }
-	  
-	  void loadText() {
-	    sPref = getPreferences();
-	    String savedText = sPref.getString(SAVED_TEXT, "");
-	    etText.setText(savedText);
-	    Toast.makeText(this, "Text loaded", Toast.LENGTH_SHORT).show();
-	  }*/
-	
-	public static HashSet read(String fileName)throws Exception
+	//history
+	public static Stack<String> read(String fileName)
 	{
+		Stack<String> st = null;
+		try{
 		ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileName));
-		HashSet<String> hs = (HashSet<String>) ois.readObject();
-		return hs;
+		st = (Stack<String>) ois.readObject();
+		}
+		catch(Exception e)
+		{
+			st = new Stack<String>();
+		}
+		return st;
 	}
-	public static void write(String fileName,HashSet hs)throws Exception
+	public static void write(String fileName,Stack<String> st)throws Exception
 	{
 		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileName));
-		oos.writeObject(hs);
+		oos.writeObject(st);
 	}
-	public static boolean add(String fileName,String value)throws Exception
+	public static void add(String fileName,String value)throws Exception
 	{
-		HashSet h = read(fileName);
-		boolean result = h.add(value);
-		write(fileName,h);
-		return result;
+		Stack<String> st = read(fileName);
+		if(!st.empty())
+		{
+			String s = st.peek();
+			if(s.equals(value))
+				return;
+		}
+		st.push(value);
+		write(fileName,st);
+	}
+	
+	//favorites
+	public static PriorityQueue readQueue (String fileName)
+	{
+		PriorityQueue q = null;
+		try{
+		ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileName));
+		q = (PriorityQueue) ois.readObject();
+		}
+		catch(Exception e)
+		{
+			q = new PriorityQueue();
+		}
+		return q;
+	}
+	public static void writeQueue(String fileName,PriorityQueue q)throws Exception
+	{
+		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileName));
+		oos.writeObject(q);
+	}
+	public static void addToQueue(String fileName,String value)throws Exception
+	{
+		PriorityQueue q = readQueue(fileName);
+		if(!q.isEmpty())
+		{
+			if(q.contains(value))
+				return;
+		}
+		q.add(value);
+		writeQueue(fileName,q);
 	}
 
 }
