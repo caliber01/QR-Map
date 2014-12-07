@@ -23,7 +23,7 @@ public class MasterDBHelper extends SQLiteOpenHelper {
     public MasterDBHelper(Context context,String DBName) {//path
       super(context,DBName, null, 1);
       myContext = context;
-      myDataBase = getWritableDatabase();
+      myDataBase = getReadableDatabase();
     }
 
     @Override
@@ -45,6 +45,7 @@ public class MasterDBHelper extends SQLiteOpenHelper {
           + "Cathedra text"
           + ");");*/
     }
+    
 
     
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

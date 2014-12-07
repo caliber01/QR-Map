@@ -1,21 +1,12 @@
 package com.example.qr_map.Logic;
 
-import java.util.*;
-
-import com.example.qr_map.Models.Laboratory;
-import com.example.qr_map.Models.Room;
-import com.example.qr_map.Models.Sponsor;
-
-import android.database.sqlite.SQLiteOpenHelper;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.Cursor;
-import android.content.Context;
-import android.util.Log;
-
-
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.PriorityQueue;
+import java.util.Stack;
+
+import android.content.Context;
 
 import com.example.qr_map.Models.Laboratory;
 import com.example.qr_map.Models.Room;
