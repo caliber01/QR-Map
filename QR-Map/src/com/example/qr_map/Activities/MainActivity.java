@@ -86,7 +86,7 @@ public class MainActivity extends ActionBarActivity {
         
         //Creating header  and footer
         View header = getLayoutInflater().inflate(R.layout.drawer_header, null);
-        mListView.addHeaderView(header);
+        mListView.addHeaderView(header,"",false);
         mListView.setAdapter(adapter);
         
 
