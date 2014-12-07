@@ -1,26 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:layout_gravity="center"
-    >
-<ImageView
-    android:id="@+id/drawer_icon"
-    android:layout_width="36dp"
-    android:layout_height="36dp"
-    android:layout_centerVertical="true"
-    android:layout_marginLeft="20dp" />
-<TextView
-    android:id="@+id/drawer_text"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_toRightOf="@id/drawer_icon"
-    android:layout_height="wrap_content"
-    android:background="@drawable/activated_background"
-    android:gravity="center_vertical"
-    android:minHeight="?attr/listPreferredItemHeightSmall"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:textAppearance="?android:attr/textAppearanceMedium"
-    android:textColor="#87000000" />
+    android:layout_height="48dp">
+ 
+     <!-- icon -->
+     <ImageView
+         android:id="@+id/drawer_icon"
+         android:layout_width="32dp"
+         android:layout_height="32dp"
+         android:layout_alignParentLeft="true"
+         android:layout_marginLeft="8dp"
+         android:layout_marginRight="8dp"
+         android:layout_marginTop="8dp"
+         />
+ 
+    <!-- title -->
+    <TextView
+         android:id="@+id/drawer_text"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_toRightOf="@+id/drawer_icon"
+         android:layout_alignBaseline="@+id/item_counter"
+         android:textSize="18sp" />
+ 
+        <!-- counter -->
+        <TextView
+            android:id="@+id/item_counter"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:textColor="@color/primary300"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:text="10" />
+ 
 </RelativeLayout>

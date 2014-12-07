@@ -3,6 +3,8 @@ package com.example.qr_map.Activities;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,6 +13,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,7 +36,9 @@ public class MainActivity extends ActionBarActivity {
 	private String DR_ICON = "icon";
 	
 	private String[] menuItems;
-	private int[] menuIcons = {R.drawable.ic_list_grey600_36dp,R.drawable.ic_star_rate_grey600_36dp,R.drawable.ic_history_grey600_36dp};;
+	private int[] menuIcons = {R.drawable.ic_list_grey600_36dp,
+			R.drawable.ic_star_rate_grey600_36dp,
+			R.drawable.ic_history_grey600_36dp};
 	private ListView mListView;
 	private DrawerLayout mDrawerLayout;
 	private CharSequence mTitle;
@@ -56,6 +61,8 @@ public class MainActivity extends ActionBarActivity {
         mDrawerLayout = (DrawerLayout) this.findViewById(R.id.drawer_layout);
         mSideLinearLayout = (LinearLayout) this.findViewById(R.id.linear_drawer);
         
+        
+        
         mDrawerToggle = new ActionBarDrawerToggle(
                 this,                 
                 mDrawerLayout,        
@@ -74,6 +81,11 @@ public class MainActivity extends ActionBarActivity {
         String[] from = {DR_TEXT,DR_ICON};
         int[] to = {R.id.drawer_text,R.id.drawer_icon};
         SimpleAdapter adapter = new SimpleAdapter(this,data,R.layout.drawer_list_item,from,to);
+        
+        
+        //Creating header  and footer
+        View header = getLayoutInflater().inflate(R.layout.drawer_header, null);
+        mListView.addHeaderView(header);
         mListView.setAdapter(adapter);
         
 
@@ -91,6 +103,15 @@ public class MainActivity extends ActionBarActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+        
+     // Associate searchable configuration with the SearchView
+        SearchManager searchManager =
+               (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView =
+                (SearchView) menu.findItem(R.id.search).getActionView();
+        searchView.setSearchableInfo(
+                searchManager.getSearchableInfo(getComponentName()));
+        
         return true;
     }
 
@@ -134,7 +155,7 @@ public class MainActivity extends ActionBarActivity {
 
         //Выделяем выбранный и закрываем навменю
         mListView.setItemChecked(position, true);
-        setTitle(menuItems[position]);
+        setTitle(menuItems[position-1]);
         mDrawerLayout.closeDrawer(mSideLinearLayout);
     }
     @Override

@@ -56,7 +56,7 @@ public class ForMaxTestLabDataAccess implements ILabDataAccess {
 	@Override
 	public List<Room> FindByName(String _Name) {
 		// TODO Auto-generated method stub
-		return null;
+		return labs;
 	}
 
 	@Override
