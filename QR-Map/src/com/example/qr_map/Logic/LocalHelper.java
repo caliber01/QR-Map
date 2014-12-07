@@ -1,7 +1,9 @@
 package com.example.qr_map.Logic;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
-import android.widget.Toast;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.HashSet;
 
 public class LocalHelper {
 	//SharedPreferences sPref;

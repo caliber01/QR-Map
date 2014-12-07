@@ -146,7 +146,7 @@ public class DataAccess implements ILabDataAccess
 	@Override
 	public void AddToHistory(String roomId) {
 		
-		LocalHelper.add(filenameHistory,roomId);
+		//LocalHelper.add(filenameHistory,roomId);
 		
 	}
 
