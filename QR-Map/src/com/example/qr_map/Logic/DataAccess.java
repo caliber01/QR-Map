@@ -93,7 +93,6 @@ public class DataAccess implements ILabDataAccess
 		return LabAssistantsFIOs;
 	}
 	
-	
 	private Sponsor gettingSponsor(String _SponsorName)
 	{
 		Sponsor sp = new Sponsor();
@@ -112,9 +111,10 @@ public class DataAccess implements ILabDataAccess
 		return sp;
 	}
 	
-	/*private LabEquipment gettingLabEquipment(String )
+	/*private LabEquipment gettingLabEquipment(String _Number)
 	{
-		return null;
+		LabEquipment le = new LabEquipment();
+		return le;
 	}*/
 	
 	
