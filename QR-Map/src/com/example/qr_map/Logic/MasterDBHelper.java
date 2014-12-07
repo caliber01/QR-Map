@@ -50,7 +50,7 @@ public class MasterDBHelper extends SQLiteOpenHelper {
               + "Telephone text," 
               + "Description text"
               + ");");
-      db.execSQL("create table Equipment ("
+      db.execSQL("create table LabEquipment ("
     		  + "Number text primary key ," 
               + "Electronic text,"
               + "HasProjector text," 
@@ -101,57 +101,7 @@ public class MasterDBHelper extends SQLiteOpenHelper {
     }
 	
 
-	public List<Room> FindByName(String _Name) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	public void AddToHistory(String roomId) {
-		// TODO Auto-generated method stub
-
-	}
-
-
-	public List<Room> GetHistory() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	public void AddToFavourites(String roomNumber) {
-		// TODO Auto-generated method stub
-
-	}
-
-
-	public void RemoveFromFavourites(String roomNumber) {
-		// TODO Auto-generated method stub
-
-	}
-
-
-	public void UpdateRating(String roomNumber, int rating) {
-		// TODO Auto-generated method stub
-
-	}
-
-
-	public List<Room> GetFavourites() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public List<Laboratory> FindBySponsor(Sponsor _Sponsor) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	public List<Room> FindByNumber(String _Number) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
   }
 
 

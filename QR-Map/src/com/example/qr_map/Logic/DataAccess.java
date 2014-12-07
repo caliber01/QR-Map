@@ -11,6 +11,7 @@ import android.content.Context;
 import com.example.qr_map.Models.Laboratory;
 import com.example.qr_map.Models.Room;
 import com.example.qr_map.Models.Sponsor;
+import com.example.qr_map.Models.LabEquipment;
 
 @SuppressWarnings("unused")
 public class DataAccess implements ILabDataAccess
@@ -111,11 +112,25 @@ public class DataAccess implements ILabDataAccess
 		return sp;
 	}
 	
-	/*private LabEquipment gettingLabEquipment(String _Number)
+	private LabEquipment gettingLabEquipment(String _Number)
 	{
 		LabEquipment le = new LabEquipment();
+		String selection = "Number = ?";
+	    String[] selectionArgs = new String[] { _Number };
+	    Hashtable<String,String> h = masterDB.query_one("LabEquipment", null, selection, selectionArgs, null, null, null);
+		if(h != null)
+		{
+			le.setNumber(h.get("Number"));
+			le.setElectronic(h.get("Electronic"));
+			le.setHasProjector(Boolean.parseBoolean(h.get("HasProjector")));
+			le.setHasWiFi(Boolean.parseBoolean(h.get("HasWiFi")));
+			le.setWiFiName(h.get("WiFiName"));
+			le.setTables(Integer.parseInt(h.get("Tables")));
+			le.setChairs(Integer.parseInt(h.get("Chairs")));
+	     
+		}
 		return le;
-	}*/
+	}
 	
 	
 	private ArrayList FindBySmth(String selection,String[] selectionArgs)
