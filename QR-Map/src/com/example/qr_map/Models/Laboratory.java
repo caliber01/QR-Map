@@ -82,6 +82,7 @@ public class Laboratory extends Room {
 	public List<String> getLabAssistantsFIOs() {
 		return LabAssistantsFIOs;
 	}
+	
 	public void setLabAssistantsFIOs(List<String> labAssistantsFIOs) {
 		LabAssistantsFIOs = labAssistantsFIOs;
 	}

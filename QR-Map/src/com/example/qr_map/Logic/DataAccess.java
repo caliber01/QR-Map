@@ -70,17 +70,52 @@ public class DataAccess implements ILabDataAccess
 	{
 		Laboratory l = new Laboratory();
 		l.setName(h.get("Name"));
-	     l.setName(h.get("Type"));
-	     l.setName(h.get("PhoneNumber"));
-	     l.setName(h.get("Activity"));
-	     l.setName(h.get("AverageRating"));
-	     l.setName(h.get("ChiefFIO"));
-	     l.setName(h.get("LabAssistantsFIOs"));
-	     l.setName(h.get("SponsorName"));
-	     l.setName(h.get("Faculty"));
-	     l.setName(h.get("Cathedra"));
+	     l.setType(h.get("Type"));
+	     l.setPhoneNumber(h.get("PhoneNumber"));
+	     l.setActivity(h.get("Activity"));
+	     l.setAverageRating(Double.parseDouble(h.get("AverageRating")));
+	     l.setChiefFIO(h.get("ChiefFIO"));
+	     l.setLabAssistantsFIOs( labAssistantsFromString(h.get("LabAssistantsFIOs")));
+	     l.setSponsor(gettingSponsor((h.get("SponsorName"))));
+	     l.setFaculty(h.get("Faculty"));
+	     l.setCathedra(h.get("Cathedra"));
 	     return l;
 	}
+	
+	private List<String> labAssistantsFromString(String labAssistantsFIOs)
+	{
+		List<String> LabAssistantsFIOs = null;
+		String s[]= labAssistantsFIOs.split(",");
+		for(int i = 0;i < s.length;i++)
+		{
+			LabAssistantsFIOs.add(s[i]);
+		}
+		return LabAssistantsFIOs;
+	}
+	
+	
+	private Sponsor gettingSponsor(String _SponsorName)
+	{
+		Sponsor sp = new Sponsor();
+		String selection = "Name = ?";
+	    String[] selectionArgs = new String[] { _SponsorName };
+	    Hashtable<String,String> h = masterDB.query_one("Sponsor", null, selection, selectionArgs, null, null, null);
+		if(h != null)
+		{
+			sp.setName(h.get("Name"));
+			sp.setWebSite(h.get("WebSite"));
+	     	sp.setDescription(h.get("Description"));
+	     	sp.setAddress(h.get("Adress"));
+	     	sp.setTelephone(h.get("Telephone"));
+	     
+		}
+		return sp;
+	}
+	
+	/*private LabEquipment gettingLabEquipment(String )
+	{
+		return null;
+	}*/
 	
 	
 	private ArrayList FindBySmth(String selection,String[] selectionArgs)

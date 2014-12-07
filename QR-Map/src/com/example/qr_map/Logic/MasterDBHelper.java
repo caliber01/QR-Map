@@ -28,22 +28,37 @@ public class MasterDBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-      /*Log.d(LOG_TAG, "--- onCreate database ---");
-      // создаем таблицу с полями
+      Log.d(LOG_TAG, "--- onCreate database ---");
       db.execSQL("create table Laboratory ("
           + "Number text primary key ," 
           + "Name text,"
           + "Type text," 
           + "PhoneNumber text," 
           + "Activity text,"
-          + "AverageRating double,"
+          + "AverageRating text,"
           + "ChiefFIO text,"
           + "LabAssistantsFIOs text,"
           + "WorkTime text,"
           + "SponsorName text,"
           + "Faculty text,"
           + "Cathedra text"
-          + ");");*/
+          + ");");
+      db.execSQL("create table Sponsor ("
+              + "Name text primary key ," 
+              + "WebSite text,"
+              + "Address text," 
+              + "Telephone text," 
+              + "Description text"
+              + ");");
+      db.execSQL("create table Equipment ("
+    		  + "Number text primary key ," 
+              + "Electronic text,"
+              + "HasProjector text," 
+              + "HasWiFi text," 
+              + "WiFiName text,"
+              + "Tables double,"
+              + "Chairs text"
+              + ");");
     }
     
 
