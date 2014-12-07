@@ -194,7 +194,6 @@ public class DataAccess implements ILabDataAccess
 			}
 
 	}
-	//ouhliub
 	@Override
 	public List<Room> GetFavourites() {
 		ArrayList listLabs = new ArrayList();
