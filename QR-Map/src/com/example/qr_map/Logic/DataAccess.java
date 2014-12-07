@@ -21,6 +21,7 @@ import com.example.qr_map.Models.Laboratory;
 import com.example.qr_map.Models.Room;
 import com.example.qr_map.Models.Sponsor;
 
+@SuppressWarnings("unused")
 public class DataAccess implements ILabDataAccess
 {
 	private ArrayList<Room> labs;
@@ -138,10 +139,15 @@ public class DataAccess implements ILabDataAccess
 		return FindBySmth("Number = ?",new String[] {_Number});
 	}
 	
+	String filenameHistory = "History.os";
+	String filename = "History.os";
+	
+	
 	@Override
 	public void AddToHistory(String roomId) {
 		
-
+		LocalHelper.add(filenameHistory,roomId);
+		
 	}
 
 	@Override

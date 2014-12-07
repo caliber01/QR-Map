@@ -4,7 +4,7 @@ import android.content.SharedPreferences.Editor;
 import android.widget.Toast;
 
 public class LocalHelper {
-	SharedPreferences sPref;
+	//SharedPreferences sPref;
 	
 	/*void saveText() {
 	    sPref = getPreferences(MODE_PRIVATE);
@@ -21,23 +21,23 @@ public class LocalHelper {
 	    Toast.makeText(this, "Text loaded", Toast.LENGTH_SHORT).show();
 	  }*/
 	
-	/*public HashSet read(String fileName)throws Exception
+	public static HashSet read(String fileName)throws Exception
 	{
 		ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileName));
 		HashSet<String> hs = (HashSet<String>) ois.readObject();
 		return hs;
 	}
-	public void write(String fileName,HashSet hs)throws Exception
+	public static void write(String fileName,HashSet hs)throws Exception
 	{
 		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileName));
 		oos.writeObject(hs);
 	}
-	public boolean add(String fileName,String value)throws Exception
+	public static boolean add(String fileName,String value)throws Exception
 	{
 		HashSet h = read(fileName);
 		boolean result = h.add(value);
 		write(fileName,h);
 		return result;
-	}*/
+	}
 
 }
