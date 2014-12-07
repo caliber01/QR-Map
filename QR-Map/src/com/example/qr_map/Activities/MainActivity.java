@@ -156,7 +156,7 @@ public class MainActivity extends ActionBarActivity {
 
         //Выделяем выбранный и закрываем навменю
         mListView.setItemChecked(position, true);
-        setTitle(menuItems[position]);
+        setTitle(menuItems[position-1]);
         mDrawerLayout.closeDrawer(mSideLinearLayout);
     }
     @Override
