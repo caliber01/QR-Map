@@ -25,7 +25,7 @@ import android.widget.SimpleAdapter;
 import com.example.qr_map.R;
 import com.example.qr_map.Fragments.CameraFragment;
 import com.example.qr_map.Fragments.LabListFragment;
-import com.example.qr_map.Logic.ForMaxTestLabDataAccess;
+import com.example.qr_map.Logic.DataAccess;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -44,8 +44,6 @@ public class MainActivity extends ActionBarActivity {
 	private CharSequence mTitle;
 	private LinearLayout mSideLinearLayout;
 	private ActionBarDrawerToggle mDrawerToggle;
-	
-	private ForMaxTestLabDataAccess data;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
