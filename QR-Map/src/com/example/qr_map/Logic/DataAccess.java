@@ -262,9 +262,6 @@ public class DataAccess implements ILabDataAccess
 		// TODO Auto-generated method stub
 
 	}
-	
-	
 
-	
 	
 }
