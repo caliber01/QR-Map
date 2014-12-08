@@ -42,7 +42,7 @@ public class SearchActivity extends ActionBarActivity {
 
 	        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
 	            String query = intent.getStringExtra(SearchManager.QUERY);
-	            mDataAccess = new DataAccess();
+	            mDataAccess = new DataAccess(this);
 	            this.getSupportActionBar().setTitle(query);
 	            Room[] results = mDataAccess.FindByName(query).toArray(new Room[]{});
 	            String[] searchRes = new String[results.length];

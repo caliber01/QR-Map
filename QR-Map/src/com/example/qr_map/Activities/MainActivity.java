@@ -152,7 +152,6 @@ public class MainActivity extends ActionBarActivity {
         frTrans.commit();
 
         //Выделяем выбранный и закрываем навменю
-        mListView.setItemChecked(position, true);
         setTitle(menuItems[position-1]);
         mDrawerLayout.closeDrawer(mSideLinearLayout);
     }
