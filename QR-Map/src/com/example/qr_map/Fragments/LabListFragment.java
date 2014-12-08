@@ -6,23 +6,21 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.qr_map.R;
-import com.example.qr_map.Logic.ForMaxTestLabDataAccess;
+import com.example.qr_map.Logic.DataAccess;
 import com.example.qr_map.Models.Laboratory;
 import com.example.qr_map.Models.Room;
 
 public class LabListFragment extends Fragment {
 
-	private final String MENU_ITEM_POSITION = "position";
+	private DataAccess mDataAccess;
 	
+	private final String MENU_ITEM_POSITION = "position";
 	private final String ROOM_NUMBER_ATTRIBUTE = "number";
 	private final String ROOM_INFO_ATTRIBUTE = "info";
 	
@@ -41,8 +39,19 @@ public class LabListFragment extends Fragment {
         recView.setLayoutManager(llm);
 		
 		
-		ForMaxTestLabDataAccess data = new ForMaxTestLabDataAccess();
-		LabAdapter adapter = new LabAdapter(data.GetAll());
+		mDataAccess = new DataAccess();
+		LabAdapter adapter = null;
+		switch(position){
+		case 1:
+			adapter = new LabAdapter(mDataAccess.GetAll());
+			break;
+		case 2:
+			adapter = new LabAdapter(mDataAccess.GetAll());
+			break;
+		case 3:
+			adapter = new LabAdapter(mDataAccess.GetAll());
+			 break;
+		}
 		recView.setAdapter(adapter);
 		
 		return frag;

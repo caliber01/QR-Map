@@ -5,15 +5,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.qr_map.R;
-import com.example.qr_map.Logic.ForMaxTestLabDataAccess;
+import com.example.qr_map.Logic.DataAccess;
 import com.example.qr_map.Models.Room;
 
 public class SearchActivity extends ActionBarActivity {
 	
 	private ListView mListView;
+	private DataAccess mDataAccess;
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -24,11 +26,11 @@ public class SearchActivity extends ActionBarActivity {
 	
 	 @Override
 	  protected void onCreate(Bundle savedInstanceState) {
-	    super.onCreate(savedInstanceState);
-	    this.setContentView(R.layout.activity_search);
-	    handleIntent(getIntent());
-	    
-	    mListView = (ListView) this.findViewById(R.id.lv_search);
+		    super.onCreate(savedInstanceState);
+		    this.setContentView(R.layout.activity_search);
+		    handleIntent(getIntent());
+		    
+		    mListView = (ListView) this.findViewById(R.id.lv_search);
 	    }
 
 	    @Override
@@ -40,15 +42,15 @@ public class SearchActivity extends ActionBarActivity {
 
 	        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
 	            String query = intent.getStringExtra(SearchManager.QUERY);
-	            ForMaxTestLabDataAccess data = new ForMaxTestLabDataAccess();
+	            mDataAccess = new DataAccess();
 	            this.getSupportActionBar().setTitle(query);
-	            Room[] results = data.FindByName(query).toArray(new Room[]{});
+	            Room[] results = mDataAccess.FindByName(query).toArray(new Room[]{});
 	            String[] searchRes = new String[results.length];
 	            for(int i = 0 ; i < results.length; i++)
 	            {
 	            	searchRes[i] = results[i].getName();
 	            }
-	            //mListView.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1));
+	            mListView.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1));
 	        }
 	    }
 }
