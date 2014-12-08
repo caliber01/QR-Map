@@ -26,9 +26,9 @@ public class MasterDBHelper extends SQLiteOpenHelper {
       myDataBase = getReadableDatabase();
     }
 
-    @Override
+   @Override
     public void onCreate(SQLiteDatabase db) {
-      Log.d(LOG_TAG, "--- onCreate database ---");
+      /*Log.d(LOG_TAG, "--- onCreate database ---");
       db.execSQL("create table Laboratory ("
           + "Number text primary key ," 
           + "Name text,"
@@ -58,7 +58,7 @@ public class MasterDBHelper extends SQLiteOpenHelper {
               + "WiFiName text,"
               + "Tables double,"
               + "Chairs text"
-              + ");");
+              + ");");*/
     }
     
 
