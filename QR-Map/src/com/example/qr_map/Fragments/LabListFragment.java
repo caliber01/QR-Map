@@ -39,7 +39,7 @@ public class LabListFragment extends Fragment {
         recView.setLayoutManager(llm);
 		
 		
-		mDataAccess = new DataAccess();
+		mDataAccess = new DataAccess(this.getActivity());
 		LabAdapter adapter = null;
 		switch(position){
 		case 1:
