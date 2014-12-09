@@ -23,7 +23,7 @@ public class DataAccess implements ILabDataAccess
 	
 	public DataAccess()
 	{
-		
+		//con
 	}
 	
 	public DataAccess(Context context)
