@@ -18,7 +18,6 @@ public class DataAccess implements ILabDataAccess
 {
 	private ArrayList<Room> labs;
 	private MasterDBHelper masterDB;
-	private MasterDBHelper localDB;
 	private Context conti;
 	
 	public DataAccess()
@@ -28,20 +27,16 @@ public class DataAccess implements ILabDataAccess
 	
 	public DataAccess(Context context)
 	{
-		this(context,null,null);
+		this(context,null);
 		
 	}
 	
+
 	public DataAccess(Context context,String masterDBName)
 	{
-		this(context,masterDBName,null);
-	}
-	
-	public DataAccess(Context context,String masterDBName,String localDBName)
-	{
 		conti = context;
+		masterDBName = null;
 		setName(masterDBName);
-		setLocalName(localDBName);
 	}
 	
 	public void setContext(Context context)
@@ -54,18 +49,11 @@ public class DataAccess implements ILabDataAccess
 		if(masterDB != null)
 		{
 			masterDB.close();
-			masterDB = new MasterDBHelper(conti,masterDBName);
 		}
+			masterDB = new MasterDBHelper(conti,masterDBName);
+		
 	}
 	
-	public void setLocalName(String localDBName)
-	{
-		if(localDB != null)
-		{
-			localDB.close();
-			localDB = new MasterDBHelper(conti,localDBName);
-		}
-	}
 	
 	private Laboratory setLab(Hashtable<String,String> h)
 	{
@@ -85,7 +73,7 @@ public class DataAccess implements ILabDataAccess
 	
 	private List<String> labAssistantsFromString(String labAssistantsFIOs)
 	{
-		List<String> LabAssistantsFIOs = null;
+		List<String> LabAssistantsFIOs = new ArrayList<String>();
 		String s[]= labAssistantsFIOs.split(",");
 		for(int i = 0;i < s.length;i++)
 		{
@@ -137,11 +125,13 @@ public class DataAccess implements ILabDataAccess
 	{
 		ArrayList listLabs = new ArrayList();
 	    List<Hashtable<String,String>> listH = masterDB.query_many("Laboratory", null, selection, selectionArgs, null, null, null);
-	    for(int i = 0;i < listH.size();i++)
+	    if(listH != null)
 	    {
-	    	listLabs.add(setLab(listH.get(i)));
+	    	for(int i = 0;i < listH.size();i++)
+	    	{
+	    		listLabs.add(setLab(listH.get(i)));
+	    	}
 	    }
-		
 	    return listLabs;
 	}
 	

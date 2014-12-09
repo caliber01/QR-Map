@@ -23,12 +23,13 @@ public class MasterDBHelper extends SQLiteOpenHelper {
     public MasterDBHelper(Context context,String DBName) {//path
       super(context,DBName, null, 1);
       myContext = context;
-      myDataBase = getReadableDatabase();
+      myDataBase = getWritableDatabase();
+      //myDataBase = getReadableDatabase();
     }
 
    @Override
     public void onCreate(SQLiteDatabase db) {
-      /*Log.d(LOG_TAG, "--- onCreate database ---");
+      Log.d(LOG_TAG, "--- onCreate database ---");
       db.execSQL("create table Laboratory ("
           + "Number text primary key ," 
           + "Name text,"
@@ -58,7 +59,8 @@ public class MasterDBHelper extends SQLiteOpenHelper {
               + "WiFiName text,"
               + "Tables double,"
               + "Chairs text"
-              + ");");*/
+              + ");");
+      db.execSQL("insert into Laboratory(Number, Name,Type , PhoneNumber , Activity ,AverageRating ,ChiefFIO ,LabAssistantsFIOs ,WorkTime ,SponsorName ,Faculty ,Cathedra ) values ('339','Sigma Lab','Computer class','123 456','Computing','6.23','Henry Smitt','bra,bro,bru','10.00-20.00','Sigma','KN','PI');");
     }
     
 
@@ -83,7 +85,7 @@ public class MasterDBHelper extends SQLiteOpenHelper {
     }
     public List<Hashtable<String,String>> query_many(String table,String[] columns,String selection,String[] selectionArgs,String groupBy,String having,String orderBy)
     {
-    	List<Hashtable<String,String>> listH = null;
+    	List<Hashtable<String,String>> listH = new ArrayList<Hashtable<String,String>>();
     	Cursor c = myDataBase.query(table, columns, selection,selectionArgs, groupBy, having, orderBy);
     	if (c != null)
 		 {
