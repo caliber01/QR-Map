@@ -34,6 +34,7 @@ public class MainActivity extends ActionBarActivity {
 	
 	private String DR_TEXT = "text";
 	private String DR_ICON = "icon";
+	private String DR_NUMBER = "number";
 	
 	private String[] menuItems;
 	private int[] menuIcons = {R.drawable.ic_list_grey600_36dp,
@@ -44,6 +45,8 @@ public class MainActivity extends ActionBarActivity {
 	private CharSequence mTitle;
 	private LinearLayout mSideLinearLayout;
 	private ActionBarDrawerToggle mDrawerToggle;
+	
+	private DataAccess mDataAccess;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +63,7 @@ public class MainActivity extends ActionBarActivity {
         mSideLinearLayout = (LinearLayout) this.findViewById(R.id.linear_drawer);
         
         
-        
+        //setting nav drawer
         mDrawerToggle = new ActionBarDrawerToggle(
                 this,                 
                 mDrawerLayout,        
@@ -68,12 +71,14 @@ public class MainActivity extends ActionBarActivity {
                 R.string.app_name  
         );
         mDrawerLayout.setDrawerListener(mDrawerToggle);
+        int[] drawerCounters = {mDataAccess.CountAll(),mDataAccess.CountFavourites(),mDataAccess.CountHistory()};
         ArrayList<HashMap<String,Object>> data = new ArrayList<HashMap<String,Object>>();
         for(int i = 0; i< 3; i++)
         {
         	HashMap<String,Object> m = new HashMap<String,Object>();
         	m.put(DR_TEXT, menuItems[i]);
         	m.put(DR_ICON, menuIcons[i]);
+        	m.put(DR_NUMBER,drawerCounters[i]);
         	data.add(m);
         }
         String[] from = {DR_TEXT,DR_ICON};

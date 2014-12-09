@@ -30,4 +30,10 @@ public interface IDataAccess {
 	public void UpdateRating(String roomNumber, int rating);
 	
 	public List<Room> GetFavourites();
+	
+	public int CountAll();
+	
+	public int CountFavourites();
+	
+	public int CountHistory();
 }
