@@ -18,8 +18,8 @@ public class DataAccess implements ILabDataAccess
 {
 	private ArrayList<Room> labs;
 	private MasterDBHelper masterDB;
-	private MasterDBHelper localDB;
 	private Context conti;
+	private String DbPath = "/data/data/com.example.qr_map/databases/";
 	
 	public DataAccess()
 	{
@@ -28,20 +28,15 @@ public class DataAccess implements ILabDataAccess
 	
 	public DataAccess(Context context)
 	{
-		this(context,null,null);
-		
+		this(context,null);
 	}
 	
+
 	public DataAccess(Context context,String masterDBName)
 	{
-		this(context,masterDBName,null);
-	}
-	
-	public DataAccess(Context context,String masterDBName,String localDBName)
-	{
 		conti = context;
+		masterDB = null;
 		setName(masterDBName);
-		setLocalName(localDBName);
 	}
 	
 	public void setContext(Context context)
@@ -54,18 +49,11 @@ public class DataAccess implements ILabDataAccess
 		if(masterDB != null)
 		{
 			masterDB.close();
-			masterDB = new MasterDBHelper(conti,masterDBName);
 		}
+			masterDB = new MasterDBHelper(conti,DbPath + masterDBName);
+		
 	}
 	
-	public void setLocalName(String localDBName)
-	{
-		if(localDB != null)
-		{
-			localDB.close();
-			localDB = new MasterDBHelper(conti,localDBName);
-		}
-	}
 	
 	private Laboratory setLab(Hashtable<String,String> h)
 	{
@@ -85,7 +73,7 @@ public class DataAccess implements ILabDataAccess
 	
 	private List<String> labAssistantsFromString(String labAssistantsFIOs)
 	{
-		List<String> LabAssistantsFIOs = null;
+		List<String> LabAssistantsFIOs = new ArrayList<String>();
 		String s[]= labAssistantsFIOs.split(",");
 		for(int i = 0;i < s.length;i++)
 		{
@@ -137,11 +125,13 @@ public class DataAccess implements ILabDataAccess
 	{
 		ArrayList listLabs = new ArrayList();
 	    List<Hashtable<String,String>> listH = masterDB.query_many("Laboratory", null, selection, selectionArgs, null, null, null);
-	    for(int i = 0;i < listH.size();i++)
+	    if(listH != null)
 	    {
-	    	listLabs.add(setLab(listH.get(i)));
+	    	for(int i = 0;i < listH.size();i++)
+	    	{
+	    		listLabs.add(setLab(listH.get(i)));
+	    	}
 	    }
-		
 	    return listLabs;
 	}
 	
@@ -180,8 +170,8 @@ public class DataAccess implements ILabDataAccess
 		return FindBySmth("Number = ?",new String[] {_Number});
 	}
 	
-	String filenameHistory = "/History.os";
-	String filenameFavourites = "/Favourites.os";
+	String filenameHistory = "History.os";
+	String filenameFavourites = "Favourites.os";
 	
 	
 	@Override
@@ -198,7 +188,7 @@ public class DataAccess implements ILabDataAccess
 	@Override
 	public List<Room> GetHistory() {
 		ArrayList listLabs = new ArrayList();
-		Stack<String> st = LocalHelper.read(filenameHistory);
+		Stack<String> st = LocalHelper.read(DbPath + filenameHistory);
 		while(st.empty())
 		{
 			String s = st.pop();
@@ -238,7 +228,7 @@ public class DataAccess implements ILabDataAccess
 	@Override
 	public List<Room> GetFavourites() {
 		ArrayList listLabs = new ArrayList();
-		PriorityQueue q = LocalHelper.readQueue(filenameFavourites);
+		PriorityQueue q = LocalHelper.readQueue(DbPath + filenameFavourites);
 		while(q.isEmpty())
 		{
 			String s = (String)q.poll();
