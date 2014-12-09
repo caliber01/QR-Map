@@ -189,14 +189,18 @@ public class DataAccess implements ILabDataAccess
 	public List<Room> GetHistory() {
 		ArrayList listLabs = new ArrayList();
 		Stack<String> st = LocalHelper.read(DbPath + filenameHistory);
-		while(st.empty())
+		if(!st.empty())
 		{
-			String s = st.pop();
-			Laboratory lab = new Laboratory();
-			lab = GetRoom(s);
-			if(lab != null)
+			while(st.empty())
 			{
-				listLabs.add(lab);
+			
+				String s = st.pop();
+				Laboratory lab = new Laboratory();
+				lab = GetRoom(s);
+				if(lab != null)
+				{
+					listLabs.add(lab);
+				}
 			}
 		}
 		return listLabs;
