@@ -256,6 +256,24 @@ public class DataAccess implements ILabDataAccess
 		// TODO Auto-generated method stub
 
 	}
+	
+	@Override
+	public int CountAll() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int CountFavourites() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int CountHistory() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 	
 }
