@@ -46,10 +46,10 @@ public class LabListFragment extends Fragment {
 			adapter = new LabAdapter(mDataAccess.GetAll());
 			break;
 		case 2:
-			adapter = new LabAdapter(mDataAccess.GetAll());
+			adapter = new LabAdapter(mDataAccess.GetFavourites());
 			break;
 		case 3:
-			adapter = new LabAdapter(mDataAccess.GetAll());
+			adapter = new LabAdapter(mDataAccess.GetHistory());
 			 break;
 		}
 		recView.setAdapter(adapter);
