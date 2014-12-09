@@ -17,7 +17,7 @@
             android:layout_margin="16dp"
             android:src="@drawable/ic_camera_alt_white_24dp"
             fab:fab_colorNormal="@color/action"
-            fab:fab_colorPressed="@color/action"
-            fab:fab_colorRipple="@color/action" />
+            fab:fab_colorPressed="@color/action_pressed"
+            fab:fab_colorRipple="@color/action_ripple" />
     
 </FrameLayout>

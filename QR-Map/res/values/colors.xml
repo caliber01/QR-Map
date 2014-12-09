@@ -6,4 +6,6 @@
     <item name="primary300" type="color">#7986CB</item>
     <item name="item_selected" type="color">#26000000</item>
     <item name="action" type="color">#E91E63</item>
+    <item name="action_ripple" type="color">#F48FB1</item>
+    <item name="action_pressed" type="color">#C2185B</item>
 </resources>
