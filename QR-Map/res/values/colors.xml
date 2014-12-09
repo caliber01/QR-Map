@@ -5,4 +5,5 @@
     <item name="white" type="color">#FFFFFF</item>
     <item name="primary300" type="color">#7986CB</item>
     <item name="item_selected" type="color">#26000000</item>
+    <item name="action" type="color">#E91E63</item>
 </resources>

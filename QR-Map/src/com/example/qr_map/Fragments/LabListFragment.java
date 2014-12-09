@@ -15,6 +15,7 @@ import com.example.qr_map.R;
 import com.example.qr_map.Logic.DataAccess;
 import com.example.qr_map.Models.Laboratory;
 import com.example.qr_map.Models.Room;
+import com.melnykov.fab.FloatingActionButton;
 
 public class LabListFragment extends Fragment {
 
@@ -37,6 +38,9 @@ public class LabListFragment extends Fragment {
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recView.setLayoutManager(llm);
+        
+        FloatingActionButton fab = (FloatingActionButton) frag.findViewById(R.id.fab);
+        fab.attachToRecyclerView(recView);
 		
 		
 		mDataAccess = new DataAccess(this.getActivity());

@@ -71,7 +71,7 @@ public class MainActivity extends ActionBarActivity {
                 R.string.app_name  
         );
         mDrawerLayout.setDrawerListener(mDrawerToggle);
-        int[] drawerCounters = {mDataAccess.CountAll(),mDataAccess.CountFavourites(),mDataAccess.CountHistory()};
+        int[] drawerCounters = {10,10,10};//mDataAccess.CountAll(),mDataAccess.CountFavourites(),mDataAccess.CountHistory()};
         ArrayList<HashMap<String,Object>> data = new ArrayList<HashMap<String,Object>>();
         for(int i = 0; i< 3; i++)
         {
