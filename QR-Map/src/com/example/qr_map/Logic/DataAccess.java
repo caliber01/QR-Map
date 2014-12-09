@@ -23,7 +23,7 @@ public class DataAccess implements ILabDataAccess
 	
 	public DataAccess()
 	{
-		//con
+
 	}
 	
 	public DataAccess(Context context)
@@ -233,14 +233,17 @@ public class DataAccess implements ILabDataAccess
 	public List<Room> GetFavourites() {
 		ArrayList listLabs = new ArrayList();
 		PriorityQueue q = LocalHelper.readQueue(DbPath + filenameFavourites);
-		while(q.isEmpty())
-		{
-			String s = (String)q.poll();
-			Laboratory lab = new Laboratory();
-			lab = GetRoom(s);
-			if(lab != null)
+		if(!q.isEmpty())
 			{
-				listLabs.add(lab);
+			while(q.isEmpty())
+			{
+				String s = (String)q.poll();
+				Laboratory lab = new Laboratory();
+				lab = GetRoom(s);
+				if(lab != null)
+				{
+					listLabs.add(lab);
+				}
 			}
 		}
 		return listLabs;
