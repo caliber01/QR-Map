@@ -30,7 +30,6 @@ public class SearchActivity extends ActionBarActivity {
 		    this.setContentView(R.layout.activity_search);
 		    handleIntent(getIntent());
 		    
-		    mListView = (ListView) this.findViewById(R.id.lv_search);
 	    }
 
 	    @Override
@@ -50,6 +49,7 @@ public class SearchActivity extends ActionBarActivity {
 	            {
 	            	searchRes[i] = results[i].getName();
 	            }
+			    mListView = (ListView) this.findViewById(R.id.lv_search);
 	            mListView.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1));
 	        }
 	    }
