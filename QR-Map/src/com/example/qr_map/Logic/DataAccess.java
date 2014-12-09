@@ -19,6 +19,7 @@ public class DataAccess implements ILabDataAccess
 	private ArrayList<Room> labs;
 	private MasterDBHelper masterDB;
 	private Context conti;
+	private String DbPath = "/data/data/com.example.qr_map/databases/";
 	
 	public DataAccess()
 	{
@@ -28,14 +29,13 @@ public class DataAccess implements ILabDataAccess
 	public DataAccess(Context context)
 	{
 		this(context,null);
-		
 	}
 	
 
 	public DataAccess(Context context,String masterDBName)
 	{
 		conti = context;
-		masterDBName = null;
+		masterDB = null;
 		setName(masterDBName);
 	}
 	
@@ -50,7 +50,7 @@ public class DataAccess implements ILabDataAccess
 		{
 			masterDB.close();
 		}
-			masterDB = new MasterDBHelper(conti,masterDBName);
+			masterDB = new MasterDBHelper(conti,DbPath + masterDBName);
 		
 	}
 	
@@ -170,8 +170,8 @@ public class DataAccess implements ILabDataAccess
 		return FindBySmth("Number = ?",new String[] {_Number});
 	}
 	
-	String filenameHistory = "/History.os";
-	String filenameFavourites = "/Favourites.os";
+	String filenameHistory = "History.os";
+	String filenameFavourites = "Favourites.os";
 	
 	
 	@Override
@@ -188,7 +188,7 @@ public class DataAccess implements ILabDataAccess
 	@Override
 	public List<Room> GetHistory() {
 		ArrayList listLabs = new ArrayList();
-		Stack<String> st = LocalHelper.read(filenameHistory);
+		Stack<String> st = LocalHelper.read(DbPath + filenameHistory);
 		while(st.empty())
 		{
 			String s = st.pop();
@@ -228,7 +228,7 @@ public class DataAccess implements ILabDataAccess
 	@Override
 	public List<Room> GetFavourites() {
 		ArrayList listLabs = new ArrayList();
-		PriorityQueue q = LocalHelper.readQueue(filenameFavourites);
+		PriorityQueue q = LocalHelper.readQueue(DbPath + filenameFavourites);
 		while(q.isEmpty())
 		{
 			String s = (String)q.poll();
