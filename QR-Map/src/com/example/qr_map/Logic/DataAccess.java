@@ -156,6 +156,7 @@ public class DataAccess implements ILabDataAccess
 	@Override
 	public List<Room> FindByName(String _Name) {
 		return FindBySmth("Name = ?",new String[] {_Name });
+		//"Name like '%" + "Name" + "%'"
 	}
 
 	@Override

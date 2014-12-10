@@ -48,6 +48,10 @@ public class MainActivity extends ActionBarActivity {
 	
 	private DataAccess mDataAccess;
 	
+	public MainActivity() {
+		this.mDataAccess = new DataAccess();
+	}
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

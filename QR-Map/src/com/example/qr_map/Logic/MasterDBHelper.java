@@ -77,7 +77,10 @@ public class MasterDBHelper extends SQLiteOpenHelper {
 		 {
 			 if (c.moveToFirst()) {
 				 for (String cn : c.getColumnNames()) {
-			            h.put(cn, c.getString(c.getColumnIndex(cn)));
+					 if(c.getString(c.getColumnIndex(cn)) != null)
+					 	{
+						 h.put(cn, c.getString(c.getColumnIndex(cn)));
+					 	}
 			          }
 			 }
 		 }
@@ -93,7 +96,10 @@ public class MasterDBHelper extends SQLiteOpenHelper {
 				 do {
 					 Hashtable<String,String> h = new Hashtable<String,String>();
 					 for (String cn : c.getColumnNames()) {
-						 h.put(cn, c.getString(c.getColumnIndex(cn)));
+						 if(c.getString(c.getColumnIndex(cn)) != null)
+						 	{
+							 	h.put(cn, c.getString(c.getColumnIndex(cn)));
+						 	}
 			          	}
 					 listH.add(h);
 				 } while (c.moveToNext());
