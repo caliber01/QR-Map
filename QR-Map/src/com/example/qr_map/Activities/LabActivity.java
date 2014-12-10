@@ -1,6 +1,7 @@
 package com.example.qr_map.Activities;
 
 
+import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
@@ -15,6 +16,7 @@ import android.widget.FrameLayout;
 
 import com.example.qr_map.R;
 import com.example.qr_map.Adapters.LabInfoAdapter;
+import com.example.qr_map.Fragments.LabTabFragment;
 import com.example.qr_map.Logic.DataAccess;
 import com.example.qr_map.Models.Laboratory;
 import com.example.qr_map.Views.SlidingTabLayout;
@@ -30,7 +32,6 @@ public class LabActivity extends ActionBarActivity {
     private String[] tabTitles;
     
     private FrameLayout mFrameLayout;
-	
 	
 	 @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,7 +53,49 @@ public class LabActivity extends ActionBarActivity {
         // done AFTER the ViewPager has had it's PagerAdapter set.
         mSlidingTabLayout = (SlidingTabLayout) findViewById(R.id.sliding_tabs);
         mSlidingTabLayout.setViewPager(mViewPager);
+        mSlidingTabLayout.setSelectedIndicatorColors(R.color.primary);
     }
+	 
+	 
+	 static class SamplePagerItem {
+	        private final CharSequence mTitle;
+	        private final int mIndicatorColor;
+	        private final int mDividerColor;
+	 
+	        SamplePagerItem(CharSequence title, int indicatorColor, int dividerColor) {
+	            mTitle = title;
+	            mIndicatorColor = indicatorColor;
+	            mDividerColor = dividerColor;
+	        }
+	 
+	        /**
+	         * @return A new {@link Fragment} to be displayed by a {@link ViewPager}
+	         */
+	 
+	        /**
+	         * @return the title which represents this tab. In this sample this is used directly by
+	         * {@link android.support.v4.view.PagerAdapter#getPageTitle(int)}
+	         */
+	        CharSequence getTitle() {
+	            return mTitle;
+	        }
+	 
+	        /**
+	         * @return the color to be used for indicator on the {@link SlidingTabLayout}
+	         */
+	        int getIndicatorColor() {
+	            return mIndicatorColor;
+	        }
+	 
+	        /**
+	         * @return the color to be used for right divider on the {@link SlidingTabLayout}
+	         */
+	        int getDividerColor() {
+	            return mDividerColor;
+	        }
+	    }
+	 
+	 
 	 
 	 class SamplePagerAdapter extends PagerAdapter {
 
