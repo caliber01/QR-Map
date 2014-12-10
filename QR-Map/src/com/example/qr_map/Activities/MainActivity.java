@@ -15,6 +15,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.Menu;
@@ -25,18 +26,20 @@ import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 import com.example.qr_map.R;
 import com.example.qr_map.Fragments.CameraFragment;
+import com.example.qr_map.Fragments.LabFragment;
 import com.example.qr_map.Fragments.LabListFragment;
 import com.example.qr_map.Fragments.PrefFragment;
 import com.example.qr_map.Logic.DataAccess;
-import com.melnykov.fab.FloatingActionButton;
 
 public class MainActivity extends ActionBarActivity implements OnClickListener {
 
 	private String MY_LOG ="log";
 	private String MENU_ITEM_POSITION = "position";
+	private String LAB_NUMBER_KEY = "number";
 	
 	private String DR_TEXT = "text";
 	private String DR_ICON = "icon";
@@ -51,7 +54,6 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 	private CharSequence mTitle;
 	private LinearLayout mSideLinearLayout;
 	private ActionBarDrawerToggle mDrawerToggle;
-	private FloatingActionButton mFloatingActionButton; 
 	
 	private DataAccess mDataAccess;
 	
@@ -174,8 +176,6 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 		changeFragment(fragment);
         setTitle(menuItems[position-1]);
         mDrawerLayout.closeDrawer(mSideLinearLayout);
-        mFloatingActionButton = (FloatingActionButton) fragment.getView().findViewById(R.id.fab);
-        mFloatingActionButton.setOnClickListener(this);
     }
     
     private void changeFragment(Fragment fragment){
@@ -210,6 +210,15 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 		case R.id.fab:
 			changeFragment(new CameraFragment());
 			setTitle(R.string.camera_title);
+		}
+		if(v instanceof CardView){
+			Fragment frag = new LabFragment();
+			Bundle bundle = new Bundle();
+			bundle.putString(LAB_NUMBER_KEY,
+					((TextView) v.findViewById(R.id.lab_number))
+					.getText()
+					.toString());
+			frag.setArguments(bundle);
 		}
 	}
     

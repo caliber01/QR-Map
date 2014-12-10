@@ -2,16 +2,19 @@ package com.example.qr_map.Fragments;
 
 import java.util.List;
 
-import android.os.Bundle;
 import android.app.Fragment;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.qr_map.R;
+import com.example.qr_map.Activities.MainActivity;
 import com.example.qr_map.Logic.DataAccess;
 import com.example.qr_map.Models.Laboratory;
 import com.example.qr_map.Models.Room;
@@ -39,9 +42,10 @@ public class LabListFragment extends Fragment {
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recView.setLayoutManager(llm);
         
+        
         FloatingActionButton fab = (FloatingActionButton) frag.findViewById(R.id.fab);
         fab.attachToRecyclerView(recView);
-		
+		fab.setOnClickListener((MainActivity)this.getActivity());
 		
 		mDataAccess = new DataAccess(this.getActivity());
 		LabAdapter adapter = null;
@@ -81,7 +85,7 @@ public class LabListFragment extends Fragment {
 			// TODO Auto-generated method stub
 			Laboratory lab = (Laboratory)labList.get(position);
 			labViewHolder.vName.setText(lab.getName());
-			labViewHolder.vNumber.setText("310b");//lab.getNumber());
+			labViewHolder.vNumber.setText(lab.getNumber());
 			labViewHolder.vSponsor.setText(lab.getSponsor().toString());
 		}
 
@@ -100,12 +104,14 @@ public class LabListFragment extends Fragment {
 		protected TextView vNumber;
 		protected TextView vName;
 		protected TextView vSponsor;
+		
 		public LabViewHolder(View v)
 		{
 			super(v);
 			vNumber =  (TextView) v.findViewById(R.id.lab_number);
 			vName = (TextView) v.findViewById(R.id.lab_name);
 			vSponsor = (TextView) v.findViewById(R.id.lab_sponsor);
+			v.setOnClickListener((MainActivity)getActivity());
 		}
 	}
 }

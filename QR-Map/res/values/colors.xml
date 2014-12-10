@@ -9,7 +9,7 @@
     <item name="action_ripple" type="color">#F48FB1</item>
     <item name="action_pressed" type="color">#C2185B</item>
     <item name="text_dark" type="color">@color/white</item>
-    <item name="text_light" type="color">#fff</item>
-    <item name="card_background_dark" type="color">#fff</item>
+    <item name="text_light" type="color">#87000000</item>
+    <item name="card_background_dark" type="color">#87000000</item>
     <item name="card_background_light" type="color">@color/white</item>
 </resources>
