@@ -268,20 +268,17 @@ public class DataAccess implements ILabDataAccess
 	
 	@Override
 	public int CountAll() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.GetAll().size();
 	}
 
 	@Override
 	public int CountFavourites() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.GetFavourites().size();
 	}
 
 	@Override
 	public int CountHistory() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.GetHistory().size();
 	}
 
 	
