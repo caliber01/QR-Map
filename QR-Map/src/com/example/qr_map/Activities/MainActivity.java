@@ -7,6 +7,7 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -30,7 +31,6 @@ import android.widget.TextView;
 
 import com.example.qr_map.R;
 import com.example.qr_map.Fragments.CameraFragment;
-import com.example.qr_map.Fragments.LabFragment;
 import com.example.qr_map.Fragments.LabListFragment;
 import com.example.qr_map.Fragments.PrefFragment;
 import com.example.qr_map.Logic.DataAccess;
@@ -216,13 +216,11 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 			setTitle(R.string.camera_title);
 		}
 		if(v instanceof CardView){
-			Fragment frag = new LabFragment();
-			Bundle bundle = new Bundle();
-			bundle.putString(LAB_NUMBER_KEY,
-					((TextView) v.findViewById(R.id.lab_number))
+			Intent intent = new Intent(this,LabActivity.class);
+			intent.putExtra(LAB_NUMBER_KEY, ((TextView) v.findViewById(R.id.lab_number))
 					.getText()
 					.toString());
-			frag.setArguments(bundle);
+			this.startActivity(intent);
 		}
 	}
     

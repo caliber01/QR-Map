@@ -116,10 +116,14 @@ public class Laboratory extends Room {
 	}
 	@Override
 	public String toString() {
-		return "Laboratory [Activity=" + Activity + ", AverageRating="
-				+ AverageRating + ", Sponsor=" + Sponsor + ", Faculty="
-				+ Faculty + ", Cathedra=" + Cathedra +", Name=" + Name + "]";
+		return "Laboratory [PhoneNumber=" + PhoneNumber + ", Activity="
+				+ Activity + ", AverageRating=" + AverageRating + ", ChiefFIO="
+				+ ChiefFIO + ", LabAssistantsFIOs=" + LabAssistantsFIOs
+				+ ", WorkTime=" + WorkTime + ", Sponsor=" + Sponsor
+				+ ", Faculty=" + Faculty + ", Cathedra=" + Cathedra + ", Name="
+				+ Name + ", Number=" + Number + ", Type=" + Type + "]";
 	}
+	
 	
 	//Methods
 	

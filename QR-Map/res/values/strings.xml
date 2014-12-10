@@ -14,7 +14,7 @@
 	<string name="camera_title">Сканер</string>
 	
     <string-array name="menu_items">
-        <item>Лабаратории</item>
+        <item>Лаборатории</item>
         <item>Избранное</item>
         <item>История</item>
     </string-array>
@@ -26,4 +26,25 @@
 		<item>Light</item>
 		<item>Dark</item>
 	</string-array>
+	<string-array name="lab_tab_titles">
+		<item>Основное</item>
+		<item>Спонсор</item>
+		<item>Оборудование</item>
+	</string-array>
+	<string-array name="lab_info_titles">
+		<item>Основное</item>
+		<item>Спонсор</item>
+		<item>Оборудование</item>
+	</string-array>
+	<string-array name="lab_sponsor_titles">
+		<item>Основное</item>
+		<item>Спонсор</item>
+		<item>Оборудование</item>
+	</string-array>
+	<string-array name="lab_equipment_titles">
+		<item>Основное</item>
+		<item>Спонсор</item>
+		<item>Оборудование</item>
+	</string-array>
+	
 </resources>

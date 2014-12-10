@@ -1,23 +1,17 @@
 package com.example.qr_map.Fragments;
 
-import java.util.List;
-
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.qr_map.R;
 import com.example.qr_map.Activities.MainActivity;
+import com.example.qr_map.Adapters.LabListAdapter;
 import com.example.qr_map.Logic.DataAccess;
-import com.example.qr_map.Models.Laboratory;
-import com.example.qr_map.Models.Room;
 import com.melnykov.fab.FloatingActionButton;
 
 public class LabListFragment extends Fragment {
@@ -48,70 +42,24 @@ public class LabListFragment extends Fragment {
 		fab.setOnClickListener((MainActivity)this.getActivity());
 		
 		mDataAccess = new DataAccess(this.getActivity(),"qr.db");
-		LabAdapter adapter = null;
+		LabListAdapter adapter = null;
 		switch(position){
 		case 1:
-			adapter = new LabAdapter(mDataAccess.GetAll());
+			adapter = new LabListAdapter(mDataAccess.GetAll());
 			break;
 		case 2:
-			adapter = new LabAdapter(mDataAccess.GetFavourites());
+			adapter = new LabListAdapter(mDataAccess.GetFavourites());
 			break;
 		case 3:
-			adapter = new LabAdapter(mDataAccess.GetHistory());
+			adapter = new LabListAdapter(mDataAccess.GetHistory());
 			 break;
 		}
 		recView.setAdapter(adapter);
 		
 		return frag;
 	}
-	public void someMethod(){}
-	public class LabAdapter extends RecyclerView.Adapter<LabViewHolder> 
-	{
-		private List<Room> labList;
-		
-		public LabAdapter(List<Room> labList)
-		{
-			this.labList = labList;
-		}
-		
-		@Override
-		public int getItemCount() {
-			// TODO Auto-generated method stub
-			return labList.size();
-		}
-
-		@Override
-		public void onBindViewHolder(LabViewHolder labViewHolder, int position) {
-			// TODO Auto-generated method stub
-			Laboratory lab = (Laboratory)labList.get(position);
-			labViewHolder.vName.setText(lab.getName());
-			labViewHolder.vNumber.setText(lab.getNumber());
-			labViewHolder.vSponsor.setText(lab.getSponsor().toString());
-		}
-
-		@Override
-		public LabViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-			// TODO Auto-generated method stub
-			View itemView = LayoutInflater.from(viewGroup.getContext())
-					.inflate(R.layout.lab_card, viewGroup,false);
-			return new LabViewHolder(itemView);
-		}
-		
-	}
 	
-	public class LabViewHolder extends RecyclerView.ViewHolder
-	{
-		protected TextView vNumber;
-		protected TextView vName;
-		protected TextView vSponsor;
-		
-		public LabViewHolder(View v)
-		{
-			super(v);
-			vNumber =  (TextView) v.findViewById(R.id.lab_number);
-			vName = (TextView) v.findViewById(R.id.lab_name);
-			vSponsor = (TextView) v.findViewById(R.id.lab_sponsor);
-			v.setOnClickListener((MainActivity)getActivity());
-		}
-	}
+	
+	
+	
 }

@@ -7,11 +7,12 @@ import java.util.PriorityQueue;
 import java.util.Stack;
 
 import android.content.Context;
+import android.util.Log;
 
+import com.example.qr_map.Models.LabEquipment;
 import com.example.qr_map.Models.Laboratory;
 import com.example.qr_map.Models.Room;
 import com.example.qr_map.Models.Sponsor;
-import com.example.qr_map.Models.LabEquipment;
 
 @SuppressWarnings("unused")
 public class DataAccess implements ILabDataAccess
@@ -141,7 +142,7 @@ public class DataAccess implements ILabDataAccess
 	
 	@Override
 	public Laboratory GetRoom(String _Number) {
-		Laboratory l = null;
+		Laboratory l = new Laboratory();
 		String selection = "Number = ?";
 	    String[] selectionArgs = new String[] { _Number };
 	    Hashtable<String,String> h = masterDB.query_one("Laboratory", null, selection, selectionArgs, null, null, null);
@@ -160,6 +161,7 @@ public class DataAccess implements ILabDataAccess
 	@Override
 	public List<Room> FindByName(String _Name) {
 		//return FindBySmth("Name = ?",new String[] {_Name });
+		Log.i("mylog",FindBySmth("Name like '%" + _Name + "%'",null).toString());
 		return FindBySmth("Name like '%" + _Name + "%'",null);
 	}
 

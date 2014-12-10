@@ -40,6 +40,12 @@
             android:name="android.support.PARENT_ACTIVITY"
             android:value="com.example.qr_map.Activities.MainActivity" />
         </activity>
+        <activity android:name=".Activities.LabActivity"
+            android:parentActivityName="com.example.qr_map.Activities.MainActivity">
+            <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="com.example.qr_map.Activities.LabActivity" />
+        </activity>
         
     </application>
 
