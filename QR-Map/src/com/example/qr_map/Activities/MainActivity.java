@@ -58,7 +58,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 	private DataAccess mDataAccess;
 	
 	public MainActivity() {
-		this.mDataAccess = new DataAccess(this,"qr.db");
+		//this.mDataAccess = new DataAccess(this,"qr.db");
 	}
 	
     @Override

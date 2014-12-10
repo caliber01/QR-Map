@@ -270,7 +270,8 @@ public class DataAccess implements ILabDataAccess
 	
 	@Override
 	public int CountAll() {
-		return this.GetAll().size();
+		//Log.i("mylog",Integer.valueOf(this.GetAll().size()).toString());
+		return Integer.valueOf(this.GetAll().size());
 	}
 
 	@Override
