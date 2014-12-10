@@ -7,7 +7,14 @@ public abstract class Room {
 	protected String Name;
 	protected String Number;
 	protected String Type;
+	protected Equipment mEquipment;
 	
+	public Equipment getEquipment() {
+		return mEquipment;
+	}
+	public void setEquipment(Equipment mEquipment) {
+		this.mEquipment = mEquipment;
+	}
 	//Accessors
 	public String getName() {
 		return Name;

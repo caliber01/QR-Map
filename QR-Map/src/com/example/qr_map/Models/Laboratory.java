@@ -2,6 +2,8 @@ package com.example.qr_map.Models;
 
 import java.util.List;
 
+import com.example.qr_map.R;
+
 
 public class Laboratory extends Room {
 	
@@ -24,6 +26,7 @@ public class Laboratory extends Room {
 	public Laboratory(
 			String _Name,
 			Sponsor _Sponsor,
+			Equipment _Equipment,
 			String _Number,
 			String _Type,
 			String _Faculty,
@@ -37,6 +40,7 @@ public class Laboratory extends Room {
 	{
 		Name = _Name;
 		Sponsor = _Sponsor;
+		mEquipment = _Equipment;
 		Number = _Number;
 		Type = _Type;
 		Faculty = _Faculty;
@@ -45,9 +49,7 @@ public class Laboratory extends Room {
 		LabAssistantsFIOs = _LabAssistantsFIOs;
 		WorkTime = _WorkTime;
 		Activity = _Activity;
-		AverageRating = _AverageRating;
-		
-		
+		AverageRating = _AverageRating;		
 	}
 
 	//Accessors
@@ -126,5 +128,22 @@ public class Laboratory extends Room {
 	
 	
 	//Methods
-	
+	public String getCampus(){
+		String campus;
+		switch(Number.charAt(Number.length()-1)){
+		case 'ט':
+			campus = "ָ";
+			break;
+		case 'ח':
+			campus = "ַ";
+			break;
+		default:
+			campus = "ֳכאגםûי";
+			break;
+		}
+		return campus;
+	}
+	public char getFloor(){
+		return Number.charAt(0);
+	}
 }

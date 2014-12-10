@@ -26,25 +26,37 @@
 		<item>Light</item>
 		<item>Dark</item>
 	</string-array>
+	
 	<string-array name="lab_tab_titles">
 		<item>Основное</item>
 		<item>Спонсор</item>
 		<item>Оборудование</item>
 	</string-array>
 	<string-array name="lab_info_titles">
-		<item>Основное</item>
+		<item>Корпус/этаж</item>
+		<item>Тип лаборатории</item>
 		<item>Спонсор</item>
-		<item>Оборудование</item>
+		<item>Сфера деятельности</item>
+		<item>Факультет</item>
+		<item>Кафедра</item>
+		<item>Ответственный</item>
+		<item>Телефон</item>
+		<item>Рабочее время</item>
+		<item>Ассистенты лаборатории</item>
 	</string-array>
 	<string-array name="lab_sponsor_titles">
-		<item>Основное</item>
-		<item>Спонсор</item>
-		<item>Оборудование</item>
+		<item>Web-site</item>
+		<item>Адрес</item>
+		<item>Телефон</item>
+		<item>Описание</item>
 	</string-array>
 	<string-array name="lab_equipment_titles">
-		<item>Основное</item>
-		<item>Спонсор</item>
-		<item>Оборудование</item>
+		<item>Техника</item>
+		<item>Наличие проектора</item>
+		<item>WI-FI</item>
+		<item>Столы</item>
+		<item>Посадочные места</item>
 	</string-array>
+	
 	
 </resources>

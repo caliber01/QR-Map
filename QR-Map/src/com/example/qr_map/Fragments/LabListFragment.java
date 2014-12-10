@@ -45,13 +45,13 @@ public class LabListFragment extends Fragment {
 		LabListAdapter adapter = null;
 		switch(position){
 		case 1:
-			adapter = new LabListAdapter(mDataAccess.GetAll());
+			adapter = new LabListAdapter(mDataAccess.GetAll(), this);
 			break;
 		case 2:
-			adapter = new LabListAdapter(mDataAccess.GetFavourites());
+			adapter = new LabListAdapter(mDataAccess.GetFavourites(), this);
 			break;
 		case 3:
-			adapter = new LabListAdapter(mDataAccess.GetHistory());
+			adapter = new LabListAdapter(mDataAccess.GetHistory(), this);
 			 break;
 		}
 		recView.setAdapter(adapter);
