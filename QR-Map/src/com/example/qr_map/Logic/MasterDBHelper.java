@@ -61,9 +61,15 @@ public class MasterDBHelper extends SQLiteOpenHelper {
               + "Chairs text"
               + ");");
       db.execSQL("insert into Laboratory(Number, Name,Type , PhoneNumber , Activity ,AverageRating ,ChiefFIO ,LabAssistantsFIOs ,WorkTime ,SponsorName ,Faculty ,Cathedra ) values ('339','Sigma Lab','Computer class','123 456','Computing','6.23','Henry Smitt','bra,bro,bru','10.00-20.00','Sigma','KN','PI');");
-    }
+      db.execSQL("insert into Sponsor(Name,WebSite , Address ,Telephone  ,Description ) values ('Sigma','www.sigma.com','aaddrreess','3456','cool company');");
+   }
     
-
+   private String insertIntoLaboratory()
+   {
+	   String values = "insert into Laboratory(Number, Name,Type , PhoneNumber , Activity ,AverageRating ,ChiefFIO ,LabAssistantsFIOs ,WorkTime ,SponsorName ,Faculty ,Cathedra )  values (";
+	   
+	   return values;
+   }
     
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
