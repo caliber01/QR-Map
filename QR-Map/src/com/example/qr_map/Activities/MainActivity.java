@@ -3,20 +3,24 @@ package com.example.qr_map.Activities;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
+import android.preference.PreferenceManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -25,9 +29,11 @@ import android.widget.SimpleAdapter;
 import com.example.qr_map.R;
 import com.example.qr_map.Fragments.CameraFragment;
 import com.example.qr_map.Fragments.LabListFragment;
+import com.example.qr_map.Fragments.PrefFragment;
 import com.example.qr_map.Logic.DataAccess;
+import com.melnykov.fab.FloatingActionButton;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements OnClickListener {
 
 	private String MY_LOG ="log";
 	private String MENU_ITEM_POSITION = "position";
@@ -45,11 +51,22 @@ public class MainActivity extends ActionBarActivity {
 	private CharSequence mTitle;
 	private LinearLayout mSideLinearLayout;
 	private ActionBarDrawerToggle mDrawerToggle;
+	private FloatingActionButton mFloatingActionButton; 
 	
 	private DataAccess mDataAccess;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+    	
+    	SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+    	String theme = pref.getString("theme", "Light");
+    	Log.i("mylog",theme);
+    	if(theme.equals("Light"))
+    		setTheme(R.style.AppTheme);
+    	else{
+    		setTheme(R.style.AppThemeDark);
+    	}
+    	
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
@@ -93,12 +110,11 @@ public class MainActivity extends ActionBarActivity {
         
 
 		Fragment fragment = new CameraFragment();
-		FragmentTransaction frTrans = this.getSupportFragmentManager().beginTransaction();
+		FragmentTransaction frTrans = this.getFragmentManager().beginTransaction();
         frTrans.add(R.id.content_frame, fragment);
         frTrans.commit();
-        
+
         mListView.setOnItemClickListener( new DrawerItemClickListener());
-               
     }
 
 
@@ -128,6 +144,10 @@ public class MainActivity extends ActionBarActivity {
         }
         int id = item.getItemId();
         if (id == R.id.action_settings) {
+        	getFragmentManager().beginTransaction()
+            .replace(R.id.content_frame, new PrefFragment())
+            .commit();
+        	setTitle(R.string.pref);
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -151,15 +171,19 @@ public class MainActivity extends ActionBarActivity {
 		Fragment fragment = new LabListFragment();
 		fragment.setArguments(bundle);
 		
-		//Меняем старый экран на новый 
-		FragmentTransaction frTrans = this.getSupportFragmentManager().beginTransaction();
-        frTrans.replace(R.id.content_frame, fragment);
-        frTrans.commit();
-
-        //Выделяем выбранный и закрываем навменю
+		changeFragment(fragment);
         setTitle(menuItems[position-1]);
         mDrawerLayout.closeDrawer(mSideLinearLayout);
+        mFloatingActionButton = (FloatingActionButton) fragment.getView().findViewById(R.id.fab);
+        mFloatingActionButton.setOnClickListener(this);
     }
+    
+    private void changeFragment(Fragment fragment){
+    	FragmentTransaction frTrans = this.getFragmentManager().beginTransaction();
+        frTrans.replace(R.id.content_frame, fragment);
+        frTrans.commit();
+    }
+    
     @Override
     public void setTitle(CharSequence title) {
         mTitle = title;
@@ -177,6 +201,17 @@ public class MainActivity extends ActionBarActivity {
         super.onConfigurationChanged(newConfig);
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
+
+
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		switch(v.getId()){
+		case R.id.fab:
+			changeFragment(new CameraFragment());
+			setTitle(R.string.camera_title);
+		}
+	}
     
 }
 

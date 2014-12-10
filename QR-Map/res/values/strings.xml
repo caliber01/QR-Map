@@ -8,10 +8,22 @@
 	<string name="search_hint">Введите название лаборатории</string>
 	<string name="drawer_header">Фильтры</string>
 	<string name="drawer_update">Обновить базу</string>
+	<string name="pref">Настройки</string>
+	<string name="pref_description">Выберите тему оформления</string>
+	<string name="pref_title">Тема оформления</string>
+	<string name="camera_title">Сканер</string>
 	
     <string-array name="menu_items">
         <item>Лабаратории</item>
         <item>Избранное</item>
         <item>История</item>
     </string-array>
+    <string-array name="themes">
+		<item>Светлая</item>
+		<item>Темная</item>
+	</string-array>
+	<string-array name="theme_values">
+		<item>Light</item>
+		<item>Dark</item>
+	</string-array>
 </resources>
