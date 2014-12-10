@@ -40,10 +40,9 @@ public class LabActivity extends ActionBarActivity {
 		 this.setContentView(R.layout.activity_lab);
 		 
 		String labNumber = this.getIntent().getExtras().getString(LAB_NUMBER_KEY);
+		Log.i("mytaf","in lbaactivity: "+labNumber);
 		setTitle(labNumber);
 		lab = (Laboratory)((new DataAccess(this,"qr.db").GetRoom(labNumber)));
-		Log.i("mylog", lab.toString());
-		Log.i("mylog", labNumber);
 		tabTitles = this.getResources().getStringArray(R.array.lab_tab_titles);
 		
 		mViewPager = (ViewPager) findViewById(R.id.viewpager);

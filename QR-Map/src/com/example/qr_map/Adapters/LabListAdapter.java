@@ -33,8 +33,8 @@ public class LabListAdapter extends RecyclerView.Adapter<LabListViewHolder>
 	public void onBindViewHolder(LabListViewHolder labViewHolder, int position) {
 		// TODO Auto-generated method stub
 		Laboratory lab = (Laboratory)labList.get(position);
-		labViewHolder.vTitle.setText(lab.getName());
-		labViewHolder.vInfo.setText(lab.getNumber());
+		labViewHolder.vTitle.setText(lab.getNumber());
+		labViewHolder.vInfo.setText(lab.getName());
 		labViewHolder.vSponsor.setText(lab.getSponsor().toString());
 	}
 

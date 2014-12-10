@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,7 +48,13 @@ public class LabInfoAdapter extends RecyclerView.Adapter<LabInfoViewHolder>  {
 		
 		for(int i = 0; i < titles.length; i++){
 			m = new HashMap<String,String>();
-			m.put(TITLE_KEY,infos[i]);
+			Log.i("melog", m.toString());
+			if(infos[i]!=null){
+				m.put(TITLE_KEY,infos[i]);
+			}
+			else{
+				m.put(TITLE_KEY,"Нет");
+			}
 			m.put(INFO_KEY,infos[i]);
 			infoList.add(m);
 		}

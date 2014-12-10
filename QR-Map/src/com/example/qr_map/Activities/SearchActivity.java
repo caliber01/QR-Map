@@ -57,7 +57,6 @@ public class SearchActivity extends ActionBarActivity implements OnItemClickList
 	            this.getSupportActionBar().setTitle(query);
 	            
 	            List<Room> results = mDataAccess.FindByName(query);
-	            Log.i("mylog", "LabList: "+results.toString());
 			    mListView = (ListView) this.findViewById(R.id.lv_search);
 			    mListView.setOnItemClickListener(this);
 	            mListView.setAdapter(new SearchAdapter(results));
@@ -67,6 +66,7 @@ public class SearchActivity extends ActionBarActivity implements OnItemClickList
 		@Override
 		public void onItemClick(AdapterView<?> arg0, View view, int position,
 				long id) {
+			Log.i("mylog","getting: "+view.getTag().toString());
 			Intent intent = new Intent(this,LabActivity.class);
 			intent.putExtra(LAB_NUMBER_KEY, view.getTag().toString());
 			startActivity(intent);
@@ -112,6 +112,7 @@ public class SearchActivity extends ActionBarActivity implements OnItemClickList
 				}
 				
 				Room r = searchResults.get(position);
+				Log.i("mylog","setting: "+r.getNumber());
 				view.setText(r.getName());
 				view.setTag(r.getNumber());
 				return view;
