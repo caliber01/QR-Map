@@ -63,6 +63,7 @@ public class DataAccess implements ILabDataAccess
 	{
 		Laboratory l = new Laboratory();
 		l.setName(h.get("Name"));
+		l.setNumber(h.get("Number"));
 	     l.setType(h.get("Type"));
 	     l.setPhoneNumber(h.get("PhoneNumber"));
 	     l.setActivity(h.get("Activity"));
