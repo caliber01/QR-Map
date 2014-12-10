@@ -20,6 +20,7 @@ public class DataAccess implements ILabDataAccess
 	private MasterDBHelper masterDB;
 	private Context conti;
 	private String DbPath = "/data/data/com.example.qr_map/databases/";
+	private final String nameDB = "qr.db";
 	
 	public DataAccess()
 	{
@@ -46,11 +47,14 @@ public class DataAccess implements ILabDataAccess
 	
 	public void setName(String masterDBName)
 	{
+		String s = masterDBName;
+		if(s == null)
+			s = nameDB;
 		if(masterDB != null)
 		{
 			masterDB.close();
 		}
-			masterDB = new MasterDBHelper(conti,DbPath + masterDBName);
+			masterDB = new MasterDBHelper(conti,DbPath + s);
 		
 	}
 	
@@ -155,7 +159,8 @@ public class DataAccess implements ILabDataAccess
 
 	@Override
 	public List<Room> FindByName(String _Name) {
-		return FindBySmth("Name = ?",new String[] {_Name });
+		//return FindBySmth("Name = ?",new String[] {_Name });
+		return FindBySmth("Name like '%" + _Name + "%'",null);
 	}
 
 	@Override

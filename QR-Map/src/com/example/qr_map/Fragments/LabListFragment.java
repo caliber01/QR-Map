@@ -47,7 +47,7 @@ public class LabListFragment extends Fragment {
         fab.attachToRecyclerView(recView);
 		fab.setOnClickListener((MainActivity)this.getActivity());
 		
-		mDataAccess = new DataAccess(this.getActivity());
+		mDataAccess = new DataAccess(this.getActivity(),"qr.db");
 		LabAdapter adapter = null;
 		switch(position){
 		case 1:

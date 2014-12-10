@@ -57,6 +57,10 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 	
 	private DataAccess mDataAccess;
 	
+	public MainActivity() {
+		this.mDataAccess = new DataAccess();
+	}
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
     	
