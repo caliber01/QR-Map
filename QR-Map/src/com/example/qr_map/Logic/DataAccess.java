@@ -141,7 +141,7 @@ public class DataAccess implements ILabDataAccess
 	
 	@Override
 	public Laboratory GetRoom(String _Number) {
-		Laboratory l = null;
+		Laboratory l = new Laboratory();
 		String selection = "Number = ?";
 	    String[] selectionArgs = new String[] { _Number };
 	    Hashtable<String,String> h = masterDB.query_one("Laboratory", null, selection, selectionArgs, null, null, null);
