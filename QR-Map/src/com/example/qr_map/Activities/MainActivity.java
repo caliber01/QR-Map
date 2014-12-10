@@ -217,6 +217,9 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 		}
 		if(v instanceof CardView){
 			Intent intent = new Intent(this,LabActivity.class);
+			Log.i("mylog","fromcard: " + ((TextView) v.findViewById(R.id.lab_number))
+					.getText()
+					.toString());
 			intent.putExtra(LAB_NUMBER_KEY, ((TextView) v.findViewById(R.id.lab_number))
 					.getText()
 					.toString());
