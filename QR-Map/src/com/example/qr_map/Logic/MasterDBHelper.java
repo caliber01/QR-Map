@@ -20,7 +20,6 @@ public class MasterDBHelper extends SQLiteOpenHelper {
 	private SQLiteDatabase myDataBase; 
 	private Context myContext;
 	private String version;
-	private UpDataAccess up = new UpDataAccess(myContext,version);
 	
     public MasterDBHelper(Context context,String DBName) {//path
       super(context,DBName, null, 1);
@@ -68,46 +67,14 @@ public class MasterDBHelper extends SQLiteOpenHelper {
       //db.execSQL("insert into LabEquipment(Number,Electronic,HasProjector,HasWiFi,WiFiName,Tables,Chairs )  values ('339','electronic','1','1','339','12','18');");
    }
     
-   private String insertInto(String val,String[] temp)throws Exception
-   {
-	   String values = val;
-	   for(int i = 0;i < temp.length;i++)
-	   {
-		   if(i == temp.length)
-			   values += "'" + temp[i] + "'";
-		   else
-			   values += "'" + temp[i] + "'" + ",";
-	   }
-	   values += ");";
-	   
-	   return values;
-   }
    
-   private String insertIntoLaboratory()throws Exception
-   {
-	   String values = "insert into Laboratory(Number, Name,Type , PhoneNumber , Activity ,AverageRating ,ChiefFIO ,LabAssistantsFIOs ,WorkTime ,SponsorName ,Faculty ,Cathedra )  values (";
-	   String[] temp = up.Getlab();
-	   return insertInto(values,temp);
-   }
-   
-   private String insertIntoSponsor()throws Exception
-   {
-	   String values = "insert into Sponsor(Name,WebSite , Address ,Telephone  ,Description ) values (";
-	   String[] temp = up.GetSponsor();
-	   return insertInto(values,temp);
-   }
-   
-   private String insertIntoEquipment()throws Exception
-   {
-	   String values = "insert into Equipment(Number,Electronic,HasProjector,HasWiFi,WiFiName,Tables,Chairs )  values (";
-	   String[] temp = up.GetEquipment();
-	   return insertInto(values,temp);
-   }
-    
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+    	
 
     }
 
+    
+     
     public Hashtable<String,String> query_one(String table,String[] columns,String selection,String[] selectionArgs,String groupBy,String having,String orderBy)
     {
     	Hashtable<String,String> h = new Hashtable<String,String>();
@@ -147,7 +114,7 @@ public class MasterDBHelper extends SQLiteOpenHelper {
     	return listH;
     }
     
-    private String getVersion()
+    public String getVersion()
     {
     	return "1";//metadata
     }
