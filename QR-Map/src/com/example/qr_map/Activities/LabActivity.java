@@ -10,6 +10,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -176,4 +177,10 @@ public class LabActivity extends ActionBarActivity {
 	            container.removeView((View) object);
 	        }
 	    }	
+	 @Override
+	    public boolean onCreateOptionsMenu(Menu menu) {
+	        // Inflate the menu; this adds items to the action bar if it is present.
+	        getMenuInflater().inflate(R.menu.lab, menu);
+	        return true;
+	 }
 }
