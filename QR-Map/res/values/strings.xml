@@ -5,6 +5,7 @@
     <string name="action_settings">Настройки</string>
 	<string name="lab_sponsor_title">Спонсор:</string>
 	<string name="action_search">Поиск</string>
+	<string name="action_favourites">Добавить в избранное</string>
 	<string name="search_hint">Введите название лаборатории</string>
 	<string name="drawer_header">Фильтры</string>
 	<string name="drawer_update">Обновить базу</string>
