@@ -22,7 +22,7 @@ public class DataAccess implements ILabDataAccess
 	private Context conti;
 	private String DbPath = "/data/data/com.example.qr_map/databases/";
 	private final String nameDB = "qr.db";
-	public UpDataAccess up ;
+	
 	
 	public DataAccess()
 	{
@@ -40,7 +40,7 @@ public class DataAccess implements ILabDataAccess
 		conti = context;
 		masterDB = null;
 		setName(masterDBName);
-		up = new UpDataAccess(conti,masterDB.getVersion());
+		
 	}
 	
 	public void setContext(Context context)
@@ -76,6 +76,7 @@ public class DataAccess implements ILabDataAccess
 	     l.setSponsor(gettingSponsor((h.get("SponsorName"))));
 	     l.setFaculty(h.get("Faculty"));
 	     l.setCathedra(h.get("Cathedra"));
+	     l.setEquipment(gettingLabEquipment((h.get("Number"))));
 	     return l;
 	}
 	
@@ -284,44 +285,18 @@ public class DataAccess implements ILabDataAccess
 	
 	@Override
 	public void UpdateInfoFromServer() {
+		/*try{
 		
-
+		if (masterDB.up.Getlab() != masterDB.up.no);
+			masterDB.onUpgrade(masterDB.myDataBase,1,2 );
+			
+//Integer.parseInt(masterDB.getVersion()) ,Integer.parseInt(masterDB.up.version)
+		}
+		catch(Exception e)
+		{
+			
+		}*/
 	}
+	
 
-	private String insertInto(String val,String[] temp)throws Exception
-    {
- 	   String values = val;
- 	  int i = 0;
- 	   while(temp[i] != "---")
- 	   {
- 	   
- 		   if(i == temp.length)
- 			   values += "'" + temp[i] + "'";
- 		   else
- 			   values += "'" + temp[i] + "'" + ",";
- 	   }
- 	   values += ");";
- 	   return values;
-    }
-    
-    private String insertIntoLaboratory()throws Exception
-    {
- 	   String values = "insert into Laboratory(Number, Name,Type , PhoneNumber , Activity ,AverageRating ,ChiefFIO ,LabAssistantsFIOs ,WorkTime ,SponsorName ,Faculty ,Cathedra )  values (";
- 	   String[] temp = up.Getlab();
- 	   return insertInto(values,temp);
-    }
-    
-    private String insertIntoSponsor()throws Exception
-    {
- 	   String values = "insert into Sponsor(Name,WebSite , Address ,Telephone  ,Description ) values (";
- 	   String[] temp = up.GetSponsor();
- 	   return insertInto(values,temp);
-    }
-    
-    private String insertIntoEquipment()throws Exception
-    {
- 	   String values = "insert into Equipment(Number,Electronic,HasProjector,HasWiFi,WiFiName,Tables,Chairs )  values (";
- 	   String[] temp = up.GetEquipment();
- 	   return insertInto(values,temp);
-    }
 }

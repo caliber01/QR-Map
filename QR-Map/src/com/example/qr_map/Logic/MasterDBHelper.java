@@ -1,5 +1,4 @@
 package com.example.qr_map.Logic;
-import java.util.List;
 import java.util.*;
 
 import com.example.qr_map.Models.Laboratory;
@@ -17,14 +16,17 @@ import android.util.Log;
 public class MasterDBHelper extends SQLiteOpenHelper {
 
 	final String LOG_TAG = "MasterDBHelper";
-	private SQLiteDatabase myDataBase; 
+	public SQLiteDatabase myDataBase; 
 	private Context myContext;
-	final int version = 1;
+	String version;
+	public UpDataAccess up;  
 	
     public MasterDBHelper(Context context,String DBName) {//path
       super(context,DBName, null, 1);
       myContext = context;
       myDataBase = getWritableDatabase();
+      setVersionInMaster();
+      up = new UpDataAccess(myContext,"1");//Integer.valueOf(
       
       //myDataBase = getReadableDatabase();
     }
@@ -32,8 +34,6 @@ public class MasterDBHelper extends SQLiteOpenHelper {
    @Override
     public void onCreate(SQLiteDatabase db) {
       Log.d(LOG_TAG, "--- onCreate database ---");
-     // Log.d(LOG_TAG, " --- Staff db v." + myDataBase.getVersion() + " --- ");
-    //  writeStaff(myDataBase);
       db.execSQL("create table Laboratory ("
           + "Number text primary key ," 
           + "Name text,"
@@ -64,12 +64,23 @@ public class MasterDBHelper extends SQLiteOpenHelper {
               + "Tables double,"
               + "Chairs text"
               + ");");
-      //db.execSQL("insert into Laboratory(Number, Name,Type , PhoneNumber , Activity ,AverageRating ,ChiefFIO ,LabAssistantsFIOs ,WorkTime ,SponsorName ,Faculty ,Cathedra ) values ('339','Sigma Lab','Computer class','123 456','Computing','6.23','Henry Smitt','bra,bro,bru','10.00-20.00','Sigma','KN','PI');");
-      //db.execSQL("insert into Laboratory(Number, Name,Type , PhoneNumber , Activity ,AverageRating ,ChiefFIO ,LabAssistantsFIOs ,WorkTime ,SponsorName ,Faculty ,Cathedra ) values ('340','Fake Sigma Lab','Computer class','123 456','Computing','6.23','Henry Smitt','bra,bro,bru','10.00-20.00','Sigma','KN','PI');");
-      //db.execSQL("insert into Sponsor(Name,WebSite , Address ,Telephone  ,Description ) values ('Sigma','www.sigma.com','aaddrreess','3456','cool company');");
-      //db.execSQL("insert into LabEquipment(Number,Electronic,HasProjector,HasWiFi,WiFiName,Tables,Chairs )  values ('339','electronic','1','1','339','12','18');");
+      db.execSQL("create table Version ("
+    		  + "Version text primary key" + ");");
+      db.execSQL("insert into Laboratory(Number, Name,Type , PhoneNumber , Activity ,AverageRating ,ChiefFIO ,LabAssistantsFIOs ,WorkTime ,SponsorName ,Faculty ,Cathedra ) values ('339','Sigma Lab','Computer class','123 456','Computing','6.23','Henry Smitt','bra,bro,bru','10.00-20.00','Sigma','KN','PI');");
+      db.execSQL("insert into Laboratory(Number, Name,Type , PhoneNumber , Activity ,AverageRating ,ChiefFIO ,LabAssistantsFIOs ,WorkTime ,SponsorName ,Faculty ,Cathedra ) values ('340','Fake Sigma Lab','Computer class','123 456','Computing','6.23','Henry Smitt','bra,bro,bru','10.00-20.00','Sigma','KN','PI');");
+      db.execSQL("insert into Sponsor(Name,WebSite , Address ,Telephone  ,Description ) values ('Sigma','www.sigma.com','aaddrreess','3456','cool company');");
+      db.execSQL("insert into LabEquipment(Number,Electronic,HasProjector,HasWiFi,WiFiName,Tables,Chairs )  values ('339','electronic','1','1','339','12','18');");
+      db.execSQL("insert into Version (Version) values('1')");
    }
+
     
+   
+   public void setVersionInMaster()
+   {
+	   query_one("Version",null,null,null,null,null,null);
+
+   }
+   
    public Hashtable<String,String> query_one(String table,String[] columns,String selection,String[] selectionArgs,String groupBy,String having,String orderBy)
    {
    	Hashtable<String,String> h = new Hashtable<String,String>();
@@ -109,59 +120,66 @@ public class MasterDBHelper extends SQLiteOpenHelper {
    	return listH;
    }
    
-   @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-    	
-	   /*Log.d(LOG_TAG, " --- onUpgrade database from " + oldVersion
-		          + " to " + newVersion + " version --- ");
-
-		      if (oldVersion == 1 && newVersion == 2) {*/
-	   
-
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
+    {
+    	/*try{
+    		ArrayList<String> tempString = insertIntoLaboratory();
+		      if (Integer.valueOf(oldVersion) < Integer.valueOf(newVersion)) 
+		      {
+		    	  for(int i = 0; i < tempString.size();i++)
+		    	  {
+		    		  db.execSQL(tempString.get(i));
+		    	  }
+		      }
+    	}
+    	catch(Exception e)
+    	{
+    		
+    	}*/
 		       
+}
 
-    }
 
+   
+   private ArrayList<String> insertIntoLaboratory()throws Exception
+   {
+	   String values = "insert into Laboratory(Number, Name,Type , PhoneNumber , Activity ,AverageRating ,ChiefFIO ,LabAssistantsFIOs ,WorkTime ,SponsorName ,Faculty ,Cathedra )  values (";
+	   String[] temp = up.Getlab();
+	   String val = values;
+	   ArrayList<String> tempString = new ArrayList<String>();
+	   int a = 0;
+	   for(int i = 0;i < temp.length;i++)
+	   {
+		   if (temp[i] != "---")
+	   		val += "'" + temp[i] + "'" + ",";
+		   else
+			   tempString.add(a,val);
+			   val = values; 
+	   }
+		   
+	   return tempString;
+   }
+   
+   /*private String insertIntoSponsor()throws Exception
+   {
+	   String values = "insert into Sponsor(Name,WebSite , Address ,Telephone  ,Description ) values (";
+	   String[] temp = up.GetSponsor();
+	   return insertInto(values,temp);
+   }
+   
+   private String insertIntoEquipment()throws Exception
+   {
+	   String values = "insert into Equipment(Number,Electronic,HasProjector,HasWiFi,WiFiName,Tables,Chairs )  values (";
+	   String[] temp = up.GetEquipment();
+	   return insertInto(values,temp);
+   }*/
     
     public String getVersion()
     {
     	return Integer.valueOf(version).toString();
     }
 
-   /* private void writeStaff(SQLiteDatabase db) {
-        Cursor c = db.rawQuery("select * from Laboratory", null);
-        logCursor(c, "Table Laboratory");
-        c.close();
-       
-        
-        String sqlQuery = "select PL.name as Name, PS.name as Position, salary as Salary "
-          + "from people as PL "
-          + "inner join position as PS "
-          + "on PL.posid = PS.id ";
-        c = db.rawQuery(sqlQuery, null);
-        logCursor(c, "inner join");
-        c.close();
-      }
-
-      // вывод в лог данных из курсора
-      void logCursor(Cursor c, String title) {
-        if (c != null) {
-          if (c.moveToFirst()) {
-            Log.d(LOG_TAG, title + ". " + c.getCount() + " rows");
-            StringBuilder sb = new StringBuilder();
-            do {
-              sb.setLength(0);
-              for (String cn : c.getColumnNames()) {
-                sb.append(cn + " = "
-                    + c.getString(c.getColumnIndex(cn)) + "; ");
-              }
-              Log.d(LOG_TAG, sb.toString());
-            } while (c.moveToNext());
-          }
-        } else
-          Log.d(LOG_TAG, title + ". Cursor is null");
-      }
-*/
+  
 	
   }
 	

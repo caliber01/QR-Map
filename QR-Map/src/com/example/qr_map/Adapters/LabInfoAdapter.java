@@ -27,6 +27,7 @@ public class LabInfoAdapter extends RecyclerView.Adapter<LabInfoViewHolder>  {
 	
 	public LabInfoAdapter(Laboratory _lab,int resArrayId, Context _context)
 	{
+		Log.i("mylog",_lab.toString());
 		infoList = new ArrayList<HashMap<String,String>>();
 		lab = _lab;
 		String[] titles = _context.getResources().getStringArray(resArrayId);

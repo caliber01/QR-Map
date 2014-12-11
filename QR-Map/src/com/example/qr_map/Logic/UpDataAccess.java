@@ -53,87 +53,88 @@ import android.view.View;
 public class UpDataAccess 
 {
 	Context context; 
-	String version;
+	int version;
 	String[] no = new String[]{"no"};
-	public UpDataAccess(Context g,String vers){//
-		context = g;
-		version= vers;
+	public UpDataAccess(Context g,String vers){
+		//context =g;
+		version=Integer.parseInt(vers);
 	}
-
+	
 	public String[] Getlab() throws InterruptedException, ExecutionException{
 		if(getversion()!=version){
-			String[] lab;
-			UpdateTask j= new UpdateTask(context);
-			j.execute("http://alubas.com.ua/project/Laboratory.txt");
-			lab=j.get();
-			return lab;}else{return no;}
+		String[] lab;
+		UpdateTask j= new UpdateTask(context);
+		j.execute("http://alubas.com.ua/project/Laboratory.txt");
+		lab=j.get();
+		return lab;}else{return no;}
 	}
 	public String[] GetEquipment() throws InterruptedException, ExecutionException{
 		if(getversion()!=version){
-			String[] equipment;
-			UpdateTask j= new UpdateTask(context);
-			j.execute("http://alubas.com.ua/project/LabEquipment.txt");
-			equipment=j.get();
-			return equipment;}else{return no;}
-	}
-	public String[] GetSponsor() throws InterruptedException, ExecutionException{
-		if(getversion()!=version){
-			String[] sponsor;
-			UpdateTask j= new UpdateTask(context);
-			j.execute("http://alubas.com.ua/project/Sponsor.txt");
-			sponsor=j.get();
-			return sponsor;}else{return no;}
-	}
-	private String getversion() throws InterruptedException, ExecutionException{
-		String[] vers;
+		String[] equipment;
 		UpdateTask j= new UpdateTask(context);
-		j.execute("http://alubas.com.ua/project/BD.txt");
-		vers=j.get();
-		return vers[0];
+		j.execute("http://alubas.com.ua/project/LabEquipment.txt");
+		equipment=j.get();
+		return equipment;}else{return no;}
 	}
+    public String[] GetSponsor() throws InterruptedException, ExecutionException{
+    	if(getversion()!=version){
+    	String[] sponsor;
+		UpdateTask j= new UpdateTask(context);
+    	j.execute("http://alubas.com.ua/project/Sponsor.txt");
+		sponsor=j.get();
+		return sponsor;}else{return no;}
+	}
+    private int getversion() throws InterruptedException, ExecutionException{
+    	String[] vers;
+    	UpdateTask j= new UpdateTask(context);
+    	j.execute("http://alubas.com.ua/project/BD.txt");
+		vers=j.get();
+		int i=Integer.parseInt(vers[0]);
+		return i;
+    }
 }
-	class UpdateTask extends AsyncTask<String, String, String[]> {
-		Context context;
-		public UpdateTask(Context context) {
-			super();
-			this.context = context;
-		}
+class UpdateTask extends AsyncTask<String, String, String[]> {
+    Context context;
+    public UpdateTask(Context context) {
+        super();
+        this.context = context;
+    }
 
-		@Override
-		protected String[] doInBackground(String... url){
-			try {
-				URL urlr = new URL(url[0]);
+    @Override
+    protected String[] doInBackground(String... url){
+    	try {
+            URL urlr = new URL(url[0]);
 
-				HttpURLConnection con = (HttpURLConnection) urlr.openConnection();
-
-				BufferedReader br = new BufferedReader(
-						new InputStreamReader(con.getInputStream()));
-				//StringBuilder sb = new StringBuilder();
-				//String line;
-				String lab;
-
-
-				//line=br.readLine();
-				//line=br.readLine();
-
-				StringBuilder sb = new StringBuilder();
-				String[] mass;
-				while ((lab=br.readLine())!=null){
-					sb.append(lab+";");
-
-					//mass[i]=lab; 
-					//i++;
-				}
-				mass=sb.toString().split(";");
-				br.close();
-				//mass[0][0]=line;
-				//onProgressUpdate(line);
-				return mass;
-			}
-			catch (Exception e)
-			{
-				e.printStackTrace();
-				return null;
-			}
-		}
+            HttpURLConnection con = (HttpURLConnection) urlr.openConnection();
+            
+            BufferedReader br = new BufferedReader(
+                    new InputStreamReader(con.getInputStream()));
+            //StringBuilder sb = new StringBuilder();
+            //String line;
+            String lab;
+            
+           
+           //line=br.readLine();
+           //line=br.readLine();
+           
+           StringBuilder sb = new StringBuilder();
+           String[] mass;
+           while ((lab=br.readLine())!=null){
+        	   sb.append(lab+";");
+        	   
+        	   //mass[i]=lab;   
+        	   //i++;
+           }
+           mass=sb.toString().split(";");
+           br.close();
+           //mass[0][0]=line;
+           //onProgressUpdate(line);
+            return mass;
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }
