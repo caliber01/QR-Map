@@ -78,7 +78,7 @@ public class LabInfoAdapter extends RecyclerView.Adapter<LabInfoViewHolder>  {
 	public LabInfoViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
 		// TODO Auto-generated method stub
 		View itemView = LayoutInflater.from(viewGroup.getContext())
-				.inflate(R.layout.lab_card, viewGroup,false);
+				.inflate(R.layout.lab_info_card, viewGroup,false);
 		return new LabInfoViewHolder(itemView);
 	}
 }

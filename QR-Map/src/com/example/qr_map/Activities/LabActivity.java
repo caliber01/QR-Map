@@ -138,7 +138,7 @@ public class LabActivity extends ActionBarActivity {
 	        public Object instantiateItem(ViewGroup container, int position) {
 	            // Inflate a new layout from our resources
 	        	View view = null;
-	        	view = getLayoutInflater().inflate(R.layout.lab_cards_fragment,
+	        	view = getLayoutInflater().inflate(R.layout.lab_info_fragment,
 	        											container, false);
 	        	RecyclerView recView = (RecyclerView) view.findViewById(R.id.cardList);
 	    		recView.setHasFixedSize(true);
@@ -153,10 +153,10 @@ public class LabActivity extends ActionBarActivity {
 	            	adapter = new LabInfoAdapter(lab,R.array.lab_info_titles,context);
 	            	break;
 	            case 1:
-	            	adapter = new LabInfoAdapter(lab,R.array.lab_info_titles,context);
+	            	adapter = new LabInfoAdapter(lab,R.array.lab_sponsor_titles,context);
 	            	break;
 	            case 2:
-	            	adapter = new LabInfoAdapter(lab,R.array.lab_info_titles,context);
+	            	adapter = new LabInfoAdapter(lab,R.array.lab_equipment_titles,context);
 	            	break;
 	            }
 	            recView.setAdapter(adapter);

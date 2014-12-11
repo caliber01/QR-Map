@@ -13,7 +13,7 @@ public class LabTabFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
-		View frag = inflater.inflate(R.layout.lab_cards_fragment, null);
+		View frag = inflater.inflate(R.layout.lab_info_fragment, null);
 		return frag;
 	}
 }
