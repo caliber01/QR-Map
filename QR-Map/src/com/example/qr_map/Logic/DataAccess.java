@@ -40,6 +40,7 @@ public class DataAccess implements ILabDataAccess
 		conti = context;
 		masterDB = null;
 		setName(masterDBName);
+		UpdateInfoFromServer();
 		
 	}
 	
@@ -188,7 +189,7 @@ public class DataAccess implements ILabDataAccess
 	@Override
 	public void AddToHistory(String roomId) {
 		try{
-		LocalHelper.add(filenameHistory,roomId);
+		LocalHelper.add(DbPath +filenameHistory,roomId);
 		}
 		catch(Exception e)
 		{
@@ -220,7 +221,8 @@ public class DataAccess implements ILabDataAccess
 	@Override
 	public void AddToFavourites(String roomNumber) {
 		try{
-			LocalHelper.addToQueue(filenameFavourites,roomNumber);
+			LocalHelper.addToQueue(DbPath + filenameFavourites,roomNumber);
+			Log.i("mylog",roomNumber.toString());
 			}
 			catch(Exception e)
 			{
@@ -232,7 +234,7 @@ public class DataAccess implements ILabDataAccess
 	@Override
 	public void RemoveFromFavourites(String roomNumber) {
 		try{
-			LocalHelper.removeFromQueue(filenameFavourites,roomNumber);
+			LocalHelper.removeFromQueue(DbPath +filenameFavourites,roomNumber);
 			}
 			catch(Exception e)
 			{
@@ -285,17 +287,17 @@ public class DataAccess implements ILabDataAccess
 	
 	@Override
 	public void UpdateInfoFromServer() {
-		/*try{
+		try{
 		
-		if (masterDB.up.Getlab() != masterDB.up.no);
-			masterDB.onUpgrade(masterDB.myDataBase,1,2 );
+		//if (masterDB.up.Getlab() != masterDB.up.no)
+			
 			
 //Integer.parseInt(masterDB.getVersion()) ,Integer.parseInt(masterDB.up.version)
 		}
 		catch(Exception e)
 		{
 			
-		}*/
+		}
 	}
 	
 

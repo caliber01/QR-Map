@@ -71,7 +71,6 @@ public class LabInfoAdapter extends RecyclerView.Adapter<LabInfoViewHolder>  {
 	public void onBindViewHolder(LabInfoViewHolder labViewHolder, int position) {
 		// TODO Auto-generated method stub
 		HashMap<String,String> m = infoList.get(position);
-		Log.i("mylog",labViewHolder.toString());
 		labViewHolder.vTitle.setText(m.get(TITLE_KEY));
 		labViewHolder.vInfo.setText(m.get(INFO_KEY));
 	}

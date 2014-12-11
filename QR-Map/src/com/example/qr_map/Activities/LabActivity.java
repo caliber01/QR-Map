@@ -54,6 +54,9 @@ public class LabActivity extends ActionBarActivity {
         mSlidingTabLayout = (SlidingTabLayout) findViewById(R.id.sliding_tabs);
         mSlidingTabLayout.setViewPager(mViewPager);
         mSlidingTabLayout.setSelectedIndicatorColors(R.color.primary);
+        
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        
     }
 	 
 	 
@@ -179,7 +182,6 @@ public class LabActivity extends ActionBarActivity {
 	    }	
 	 @Override
 	    public boolean onCreateOptionsMenu(Menu menu) {
-	        // Inflate the menu; this adds items to the action bar if it is present.
 	        getMenuInflater().inflate(R.menu.lab, menu);
 	        MenuItem item = menu.findItem(R.id.favourites);
 	        DataAccess mDataAccess = new DataAccess(this,"qr.db");
@@ -200,6 +202,8 @@ public class LabActivity extends ActionBarActivity {
 		        	item.setIcon(R.drawable.star);
 		        	mDataAccess.AddToFavourites(lab.getNumber());
 		        }
+		        //Log.i("mylog",Integer.valueOf(mDataAccess.CountFavourites()).toString());
+		        //Log.i("mylog",lab.getNumber());
 		 }
 		 return true;
 	 }

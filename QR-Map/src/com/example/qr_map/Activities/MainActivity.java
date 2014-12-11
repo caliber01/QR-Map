@@ -34,6 +34,8 @@ import com.example.qr_map.Fragments.CameraFragment;
 import com.example.qr_map.Fragments.LabListFragment;
 import com.example.qr_map.Fragments.PrefFragment;
 import com.example.qr_map.Logic.DataAccess;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 public class MainActivity extends ActionBarActivity implements OnClickListener {
 
@@ -118,15 +120,17 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
         mListView.setAdapter(adapter);
         
 
-		Fragment fragment = new CameraFragment();
-		FragmentTransaction frTrans = this.getFragmentManager().beginTransaction();
-        frTrans.add(R.id.content_frame, fragment);
-        frTrans.commit();
-
+		Intent intent = new Intent("com.google.zxing.client.android.SCAN");
+		startActivityForResult(intent,0);
         mListView.setOnItemClickListener( new DrawerItemClickListener());
     }
 
-
+    public void onActivityResult(int requestCode,int resultCode,Intent intent){
+    	IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
+    	Intent newintent = new Intent(this,LabActivity.class);
+    	intent.putExtra(LAB_NUMBER_KEY, scanResult.getContents());
+    	startActivity(intent);
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

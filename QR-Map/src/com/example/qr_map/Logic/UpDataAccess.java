@@ -5,7 +5,10 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import android.R.integer;
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 
 import java.io.File;
@@ -29,16 +32,17 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.method.KeyListener;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 
-import java.net.HttpURLConnection; 
-import java.net.URL; 
-import java.net.MalformedURLException; 
+import java.net.HttpURLConnection;  
+import java.net.URL;  
+import java.net.MalformedURLException;  
 import java.net.URLConnection;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
-import java.io.*; 
+import java.io.*;  
 
 import android.app.Activity;
 import android.content.Context;
@@ -50,47 +54,66 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.view.View;
 
-public class UpDataAccess 
+public class UpDataAccess
 {
 	Context context; 
 	int version;
 	String[] no = new String[]{"no"};
+	String[] noinet = new String[]{"noinet"};
+	boolean estnoinet = false;
 	public UpDataAccess(Context g,String vers){
-		//context =g;
+		context =g;
 		version=Integer.parseInt(vers);
+		isOnline( context);
 	}
-	
+	public void  isOnline(Context context)
+    {
+        ConnectivityManager cm =
+                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnectedOrConnecting())
+        {
+        	estnoinet= true;
+        }else{
+        estnoinet= false;}
+    }
 	public String[] Getlab() throws InterruptedException, ExecutionException{
-		if(getversion()!=version){
+		if(estnoinet==false){ return noinet;}else{if(getversion()!=version){
 		String[] lab;
 		UpdateTask j= new UpdateTask(context);
 		j.execute("http://alubas.com.ua/project/Laboratory.txt");
-		lab=j.get();
-		return lab;}else{return no;}
+		lab=j.get();	
+			
+		return lab;}else{return no;}}
 	}
 	public String[] GetEquipment() throws InterruptedException, ExecutionException{
-		if(getversion()!=version){
+		if(estnoinet==false){ return noinet;}else{if(estnoinet==false){ return noinet;}else{if(getversion()!=version){
 		String[] equipment;
 		UpdateTask j= new UpdateTask(context);
 		j.execute("http://alubas.com.ua/project/LabEquipment.txt");
 		equipment=j.get();
-		return equipment;}else{return no;}
-	}
+		return equipment;}else{return no;}}}	}
     public String[] GetSponsor() throws InterruptedException, ExecutionException{
-    	if(getversion()!=version){
+    	if(estnoinet==false){ return noinet;}else{if(getversion()!=version){
     	String[] sponsor;
 		UpdateTask j= new UpdateTask(context);
     	j.execute("http://alubas.com.ua/project/Sponsor.txt");
 		sponsor=j.get();
-		return sponsor;}else{return no;}
+		return sponsor;}else{return no;}}
 	}
-    private int getversion() throws InterruptedException, ExecutionException{
+    public int getversion() throws InterruptedException, ExecutionException{
     	String[] vers;
     	UpdateTask j= new UpdateTask(context);
     	j.execute("http://alubas.com.ua/project/BD.txt");
-		vers=j.get();
+		
+    	vers=j.get();
+    	if(vers[0]==noinet[0]){
+    		return 0;
+    	}else{
+		
 		int i=Integer.parseInt(vers[0]);
-		return i;
+		
+		return i;}
     }
 }
 class UpdateTask extends AsyncTask<String, String, String[]> {
@@ -134,6 +157,7 @@ class UpdateTask extends AsyncTask<String, String, String[]> {
         catch (Exception e)
         {
             e.printStackTrace();
+            //String[] noinet = new String[]{"noinet"};
             return null;
         }
     }

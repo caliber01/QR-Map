@@ -26,8 +26,7 @@ public class MasterDBHelper extends SQLiteOpenHelper {
       myContext = context;
       myDataBase = getWritableDatabase();
       setVersionInMaster();
-      up = new UpDataAccess(myContext,"1");//Integer.valueOf(
-      
+      up = new UpDataAccess(myContext,"1");//Integer.valueOf      
       //myDataBase = getReadableDatabase();
     }
 
@@ -122,7 +121,7 @@ public class MasterDBHelper extends SQLiteOpenHelper {
    
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
     {
-    	/*try{
+    	try{
     		ArrayList<String> tempString = insertIntoLaboratory();
 		      if (Integer.valueOf(oldVersion) < Integer.valueOf(newVersion)) 
 		      {
@@ -135,9 +134,10 @@ public class MasterDBHelper extends SQLiteOpenHelper {
     	catch(Exception e)
     	{
     		
-    	}*/
+    	}
 		       
 }
+ 
 
 
    
@@ -145,6 +145,7 @@ public class MasterDBHelper extends SQLiteOpenHelper {
    {
 	   String values = "insert into Laboratory(Number, Name,Type , PhoneNumber , Activity ,AverageRating ,ChiefFIO ,LabAssistantsFIOs ,WorkTime ,SponsorName ,Faculty ,Cathedra )  values (";
 	   String[] temp = up.Getlab();
+	   Log.i("mylog",temp[0]);
 	   String val = values;
 	   ArrayList<String> tempString = new ArrayList<String>();
 	   int a = 0;
@@ -174,9 +175,9 @@ public class MasterDBHelper extends SQLiteOpenHelper {
 	   return insertInto(values,temp);
    }*/
     
-    public String getVersion()
+    public int getVersion()
     {
-    	return Integer.valueOf(version).toString();
+    	return Integer.valueOf(version);
     }
 
   
