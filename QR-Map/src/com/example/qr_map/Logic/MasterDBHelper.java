@@ -63,15 +63,23 @@ public class MasterDBHelper extends SQLiteOpenHelper {
               + "Tables text,"
               + "Chairs text"
               + ");");
-     /* db.execSQL("create table Version ("
+      db.execSQL("create table Version ("
     		  + "Version text primary key" + ");");
-      db.execSQL("insert into Laboratory(Number, Name,Type , PhoneNumber , Activity ,AverageRating ,ChiefFIO ,LabAssistantsFIOs ,WorkTime ,SponsorName ,Faculty ,Cathedra ) values ('339','Sigma Lab','Computer class','123 456','Computing','6.23','Henry Smitt','bra,bro,bru','10.00-20.00','Sigma','KN','PI');");
+      /*db.execSQL("insert into Laboratory(Number, Name,Type , PhoneNumber , Activity ,AverageRating ,ChiefFIO ,LabAssistantsFIOs ,WorkTime ,SponsorName ,Faculty ,Cathedra ) values ('339','Sigma Lab','Computer class','123 456','Computing','6.23','Henry Smitt','bra,bro,bru','10.00-20.00','Sigma','KN','PI');");
       db.execSQL("insert into Laboratory(Number, Name,Type , PhoneNumber , Activity ,AverageRating ,ChiefFIO ,LabAssistantsFIOs ,WorkTime ,SponsorName ,Faculty ,Cathedra ) values ('340','Fake Sigma Lab','Computer class','123 456','Computing','6.23','Henry Smitt','bra,bro,bru','10.00-20.00','Sigma','KN','PI');");
       db.execSQL("insert into Sponsor(Name,WebSite , Address ,Telephone  ,Description ) values ('Sigma','www.sigma.com','aaddrreess','3456','cool company');");
       db.execSQL("insert into LabEquipment(Number,Electronic,HasProjector,HasWiFi,WiFiName,Tables,Chairs )  values ('339','electronic','1','1','339','12','18');");
-      db.execSQL("insert into Version (Version) values('1')");
-  */
+      db.execSQL("insert into Version (Version) values('1')");*/
+  
+      try{
+      insertIntoLaboratory(db);
+      insertIntoSponsor(db);
+      insertIntoEquipment(db);
+      }
+      catch(Exception e)
+      {
       
+      }
    }
 
     
@@ -144,18 +152,18 @@ public class MasterDBHelper extends SQLiteOpenHelper {
             db.execSQL(sql);
             sql = "drop table if exists " + "Sponsor";
             db.execSQL(sql);
-            sql = "drop table if exists " + "Equipment";
+            sql = "drop table if exists " + "LabEquipment";
+            db.execSQL(sql);
+            sql = "drop table if exists " + "Version";
             db.execSQL(sql);
 
             onCreate(db);
-            insertIntoLaboratory(db);
-            insertIntoSponsor(db);
-            insertIntoEquipment(db);
+            
             
     	}
     	catch(Exception e)
     	{
-    		
+    		Log.i("mylog", e.getMessage());
     	}
 		       
     }
@@ -168,11 +176,19 @@ public class MasterDBHelper extends SQLiteOpenHelper {
 	   int a = 0;
 	   for(int i = 0;i < temp.length;i++)
 	   {
-		   if (temp[i] != "---")
-	   		val += "'" + temp[i] + "'" + ",";
+		   if (!temp[i+1].equals("---"))
+		   {
+			   String s = "'" + temp[i] + "'" + ",";
+	   			val += s;
+		   }
 		   else
+		   {
+			   val += "'" + temp[i] + "'" + ")";
 			   tempString.add(a,val);
 			   val = values; 
+			   a++;
+			   i++;
+		   }
 	   }
 	   return tempString;
    }
@@ -213,7 +229,11 @@ public class MasterDBHelper extends SQLiteOpenHelper {
 			db.execSQL(tempString.get(i));
  	  }  
    }
-    
+   public void insertIntoVersion(SQLiteDatabase db)throws Exception
+   {
+	   int i = getVersion() + 1;
+	   db.execSQL("insert into Version(Version) values(" + Integer.valueOf(i).toString() + ")");
+   }
   
 
   

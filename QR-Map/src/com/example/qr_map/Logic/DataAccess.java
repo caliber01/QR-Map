@@ -182,8 +182,8 @@ public class DataAccess implements ILabDataAccess
 		return FindBySmth("Number = ?",new String[] {_Number});
 	}
 	
-	String filenameHistory = "History.os";
-	String filenameFavourites = "Favourites.os";
+	String filenameHistory = "History.txt";
+	String filenameFavourites = "Favourites.txt";
 	
 	
 	@Override
