@@ -22,7 +22,7 @@ public class DataAccess implements ILabDataAccess
 	private Context conti;
 	private String DbPath = "/data/data/com.example.qr_map/databases/";
 	private final String nameDB = "qr.db";
-	private UpDataAccess up = new UpDataAccess(conti,masterDB.getVersion());
+	public UpDataAccess up ;
 	
 	public DataAccess()
 	{
@@ -40,6 +40,7 @@ public class DataAccess implements ILabDataAccess
 		conti = context;
 		masterDB = null;
 		setName(masterDBName);
+		up = new UpDataAccess(conti,masterDB.getVersion());
 	}
 	
 	public void setContext(Context context)
@@ -287,18 +288,19 @@ public class DataAccess implements ILabDataAccess
 
 	}
 
-	/*private String insertInto(String val,String[] temp)throws Exception
+	private String insertInto(String val,String[] temp)throws Exception
     {
  	   String values = val;
- 	   for(int i = 0;i < temp.length;i++)
+ 	  int i = 0;
+ 	   while(temp[i] != "---")
  	   {
+ 	   
  		   if(i == temp.length)
  			   values += "'" + temp[i] + "'";
  		   else
  			   values += "'" + temp[i] + "'" + ",";
  	   }
  	   values += ");";
- 	   
  	   return values;
     }
     
@@ -321,5 +323,5 @@ public class DataAccess implements ILabDataAccess
  	   String values = "insert into Equipment(Number,Electronic,HasProjector,HasWiFi,WiFiName,Tables,Chairs )  values (";
  	   String[] temp = up.GetEquipment();
  	   return insertInto(values,temp);
-    }*/
+    }
 }
