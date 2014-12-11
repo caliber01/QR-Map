@@ -77,7 +77,7 @@ public class MasterDBHelper extends SQLiteOpenHelper {
 
     public Hashtable<String,String> query_one(String table,String[] columns,String selection,String[] selectionArgs,String groupBy,String having,String orderBy)
     {
-    	Hashtable<String,String> h = null;
+    	Hashtable<String,String> h = new Hashtable<String,String>();
     	Cursor c = myDataBase.query(table, columns, selection,selectionArgs, groupBy, having, orderBy);
     	if (c != null)
 		 {
