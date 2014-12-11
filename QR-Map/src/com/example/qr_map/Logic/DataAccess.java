@@ -122,8 +122,8 @@ public class DataAccess implements ILabDataAccess
 			le.setHasProjector(Boolean.parseBoolean(h.get("HasProjector")));
 			le.setHasWiFi(Boolean.parseBoolean(h.get("HasWiFi")));
 			le.setWiFiName(h.get("WiFiName"));
-			le.setTables(Integer.parseInt(h.get("Tables")));
-			le.setChairs(Integer.parseInt(h.get("Chairs")));
+			le.setTables(h.get("Tables"));
+			le.setChairs(h.get("Chairs"));
 	     
 		}
 		return le;

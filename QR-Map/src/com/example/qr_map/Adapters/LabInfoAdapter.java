@@ -51,12 +51,12 @@ public class LabInfoAdapter extends RecyclerView.Adapter<LabInfoViewHolder>  {
 			m = new HashMap<String,String>();
 			Log.i("melog", m.toString());
 			if(infos[i]!=null){
-				m.put(TITLE_KEY,infos[i]);
+				m.put(INFO_KEY,infos[i]);
 			}
 			else{
-				m.put(TITLE_KEY,"Нет");
+				m.put(INFO_KEY,"Нет");
 			}
-			m.put(INFO_KEY,infos[i]);
+			m.put(TITLE_KEY,titles[i]);
 			infoList.add(m);
 		}
 	}
@@ -71,6 +71,7 @@ public class LabInfoAdapter extends RecyclerView.Adapter<LabInfoViewHolder>  {
 	public void onBindViewHolder(LabInfoViewHolder labViewHolder, int position) {
 		// TODO Auto-generated method stub
 		HashMap<String,String> m = infoList.get(position);
+		Log.i("mylog",labViewHolder.toString());
 		labViewHolder.vTitle.setText(m.get(TITLE_KEY));
 		labViewHolder.vInfo.setText(m.get(INFO_KEY));
 	}

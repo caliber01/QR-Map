@@ -61,7 +61,7 @@ public class MasterDBHelper extends SQLiteOpenHelper {
               + "HasProjector text," 
               + "HasWiFi text," 
               + "WiFiName text,"
-              + "Tables double,"
+              + "Tables text,"
               + "Chairs text"
               + ");");
       db.execSQL("create table Version ("

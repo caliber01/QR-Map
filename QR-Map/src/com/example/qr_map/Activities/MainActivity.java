@@ -84,8 +84,9 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
         mListView = (ListView) this.findViewById(R.id.lv_drawer);
         mDrawerLayout = (DrawerLayout) this.findViewById(R.id.drawer_layout);
         mSideLinearLayout = (LinearLayout) this.findViewById(R.id.linear_drawer);
+        Log.i("mylog", "before");
         this.mDataAccess = new DataAccess(this,"qr.db");
-        
+        Log.i("mylog", "after");
         //setting nav drawer
         mDrawerToggle = new ActionBarDrawerToggle(
                 this,                

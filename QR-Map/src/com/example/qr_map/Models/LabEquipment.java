@@ -9,8 +9,8 @@ public class LabEquipment extends Equipment {
 	private boolean HasProjector;
 	private boolean HasWiFi;
 	private String WiFiName;
-	private int Tables;
-	private int Chairs;
+	private String Tables;
+	private String Chairs;
 	
 	//Constructors
 	public LabEquipment()
@@ -24,8 +24,8 @@ public class LabEquipment extends Equipment {
 			boolean _HasProjector,
 			boolean _HasWiFi,
 			String _WiFiName,
-			int _Tables,
-			int _Chairs
+			String _Tables,
+			String _Chairs
 			)
 	{
 		Number = _Number;
@@ -73,17 +73,17 @@ public class LabEquipment extends Equipment {
 		WiFiName = wiFiName;
 	}
 	
-	public int getTables() {
+	public String getTables() {
 		return Tables;
 	}
-	public void setTables(int tables) {
+	public void setTables(String tables) {
 		Tables = tables;
 	}
 	
-	public int getChairs() {
+	public String getChairs() {
 		return Chairs;
 	}
-	public void setChairs(int chairs) {
+	public void setChairs(String chairs) {
 		Chairs = chairs;
 	}
 }
