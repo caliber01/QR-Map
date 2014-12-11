@@ -1,7 +1,6 @@
 package com.example.qr_map.Activities;
 
 
-import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
@@ -11,15 +10,16 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.example.qr_map.R;
 import com.example.qr_map.Adapters.LabInfoAdapter;
-import com.example.qr_map.Fragments.LabTabFragment;
 import com.example.qr_map.Logic.DataAccess;
 import com.example.qr_map.Models.Laboratory;
+import com.example.qr_map.Models.Room;
 import com.example.qr_map.Views.SlidingTabLayout;
 
 public class LabActivity extends ActionBarActivity {
@@ -181,6 +181,26 @@ public class LabActivity extends ActionBarActivity {
 	    public boolean onCreateOptionsMenu(Menu menu) {
 	        // Inflate the menu; this adds items to the action bar if it is present.
 	        getMenuInflater().inflate(R.menu.lab, menu);
+	        MenuItem item = menu.findItem(R.id.favourites);
+	        DataAccess mDataAccess = new DataAccess(this,"qr.db");
+	        if(! mDataAccess.GetFavourites().contains(lab)){
+	        	item.setIcon(R.drawable.star_outline);
+	        }
 	        return true;
+	 }
+	 @Override
+	 public boolean onOptionsItemSelected(MenuItem item) {
+		 if(item.getItemId() == R.id.favourites){
+			 DataAccess mDataAccess = new DataAccess(this,"qr.db");
+		        if(mDataAccess.GetFavourites().contains(lab)){
+		        	item.setIcon(R.drawable.star_outline);
+		        	mDataAccess.RemoveFromFavourites(lab.getNumber());
+		        }
+		        else{
+		        	item.setIcon(R.drawable.star);
+		        	mDataAccess.AddToFavourites(lab.getNumber());
+		        }
+		 }
+		 return true;
 	 }
 }
