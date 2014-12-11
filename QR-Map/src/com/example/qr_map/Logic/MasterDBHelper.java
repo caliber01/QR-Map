@@ -18,7 +18,9 @@ public class MasterDBHelper extends SQLiteOpenHelper {
 
 	final String LOG_TAG = "MasterDBHelper";
 	private SQLiteDatabase myDataBase; 
-	private final Context myContext;
+	private Context myContext;
+	private String version;
+	private UpDataAccess up = new UpDataAccess(myContext,version);
 	
     public MasterDBHelper(Context context,String DBName) {//path
       super(context,DBName, null, 1);
@@ -62,13 +64,43 @@ public class MasterDBHelper extends SQLiteOpenHelper {
               + ");");
       db.execSQL("insert into Laboratory(Number, Name,Type , PhoneNumber , Activity ,AverageRating ,ChiefFIO ,LabAssistantsFIOs ,WorkTime ,SponsorName ,Faculty ,Cathedra ) values ('339','Sigma Lab','Computer class','123 456','Computing','6.23','Henry Smitt','bra,bro,bru','10.00-20.00','Sigma','KN','PI');");
       db.execSQL("insert into Sponsor(Name,WebSite , Address ,Telephone  ,Description ) values ('Sigma','www.sigma.com','aaddrreess','3456','cool company');");
+      db.execSQL("insert into Equipment(Number,Electronic,HasProjector,HasWiFi,WiFiName,Tables,Chairs )  values ('339','electronic','1','1','12','18');");
    }
     
-   private String insertIntoLaboratory()
+   private String insertInto(String val,String[] temp)throws Exception
    {
-	   String values = "insert into Laboratory(Number, Name,Type , PhoneNumber , Activity ,AverageRating ,ChiefFIO ,LabAssistantsFIOs ,WorkTime ,SponsorName ,Faculty ,Cathedra )  values (";
+	   String values = val;
+	   for(int i = 0;i < temp.length;i++)
+	   {
+		   if(i == temp.length)
+			   values += "'" + temp[i] + "'";
+		   else
+			   values += "'" + temp[i] + "'" + ",";
+	   }
+	   values += ");";
 	   
 	   return values;
+   }
+   
+   private String insertIntoLaboratory()throws Exception
+   {
+	   String values = "insert into Laboratory(Number, Name,Type , PhoneNumber , Activity ,AverageRating ,ChiefFIO ,LabAssistantsFIOs ,WorkTime ,SponsorName ,Faculty ,Cathedra )  values (";
+	   String[] temp = up.Getlab();
+	   return insertInto(values,temp);
+   }
+   
+   private String insertIntoSponsor()throws Exception
+   {
+	   String values = "insert into Sponsor(Name,WebSite , Address ,Telephone  ,Description ) values (";
+	   String[] temp = up.GetSponsor();
+	   return insertInto(values,temp);
+   }
+   
+   private String insertIntoEquipment()throws Exception
+   {
+	   String values = "insert into Equipment(Number,Electronic,HasProjector,HasWiFi,WiFiName,Tables,Chairs )  values (";
+	   String[] temp = up.GetEquipment();
+	   return insertInto(values,temp);
    }
     
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -113,7 +145,11 @@ public class MasterDBHelper extends SQLiteOpenHelper {
 		 }
     	return listH;
     }
-	
+    
+    private String getVersion()
+    {
+    	return "1";//metadata
+    }
 
 	
   }
