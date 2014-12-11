@@ -271,7 +271,7 @@ public class DataAccess implements ILabDataAccess
 	
 	@Override
 	public int CountAll() {
-		//Log.i("mylog",Integer.valueOf(this.GetAll().size()).toString());
+		
 		return Integer.valueOf(this.GetAll().size());
 	}
 
@@ -288,11 +288,7 @@ public class DataAccess implements ILabDataAccess
 	@Override
 	public void UpdateInfoFromServer() {
 		try{
-		
-		//if (masterDB.up.Getlab() != masterDB.up.no)
-			
-			
-//Integer.parseInt(masterDB.getVersion()) ,Integer.parseInt(masterDB.up.version)
+			masterDB.UpdateInfoFromServer();
 		}
 		catch(Exception e)
 		{

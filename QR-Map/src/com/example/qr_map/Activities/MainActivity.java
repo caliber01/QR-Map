@@ -118,10 +118,12 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
         View header = getLayoutInflater().inflate(R.layout.drawer_header, null);
         mListView.addHeaderView(header,"",false);
         mListView.setAdapter(adapter);
-        
 
-		Intent intent = new Intent("com.google.zxing.client.android.SCAN");
-		startActivityForResult(intent,0);
+        getFragmentManager().beginTransaction()
+        .add(R.id.content_frame, new CameraFragment())
+        .commit();
+    	setTitle(R.string.camera_title);
+
         mListView.setOnItemClickListener( new DrawerItemClickListener());
     }
 

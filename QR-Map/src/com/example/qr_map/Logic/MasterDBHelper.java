@@ -25,8 +25,8 @@ public class MasterDBHelper extends SQLiteOpenHelper {
       super(context,DBName, null, 1);
       myContext = context;
       myDataBase = getWritableDatabase();
-      setVersionInMaster();
-      up = new UpDataAccess(myContext,"1");//Integer.valueOf      
+      setVersion();
+      up = new UpDataAccess(myContext,"1");      
       //myDataBase = getReadableDatabase();
     }
 
@@ -63,21 +63,28 @@ public class MasterDBHelper extends SQLiteOpenHelper {
               + "Tables text,"
               + "Chairs text"
               + ");");
-      db.execSQL("create table Version ("
+     /* db.execSQL("create table Version ("
     		  + "Version text primary key" + ");");
       db.execSQL("insert into Laboratory(Number, Name,Type , PhoneNumber , Activity ,AverageRating ,ChiefFIO ,LabAssistantsFIOs ,WorkTime ,SponsorName ,Faculty ,Cathedra ) values ('339','Sigma Lab','Computer class','123 456','Computing','6.23','Henry Smitt','bra,bro,bru','10.00-20.00','Sigma','KN','PI');");
       db.execSQL("insert into Laboratory(Number, Name,Type , PhoneNumber , Activity ,AverageRating ,ChiefFIO ,LabAssistantsFIOs ,WorkTime ,SponsorName ,Faculty ,Cathedra ) values ('340','Fake Sigma Lab','Computer class','123 456','Computing','6.23','Henry Smitt','bra,bro,bru','10.00-20.00','Sigma','KN','PI');");
       db.execSQL("insert into Sponsor(Name,WebSite , Address ,Telephone  ,Description ) values ('Sigma','www.sigma.com','aaddrreess','3456','cool company');");
       db.execSQL("insert into LabEquipment(Number,Electronic,HasProjector,HasWiFi,WiFiName,Tables,Chairs )  values ('339','electronic','1','1','339','12','18');");
       db.execSQL("insert into Version (Version) values('1')");
+  */
+      
    }
 
     
    
-   public void setVersionInMaster()
+   public void setVersion()
    {
-	   query_one("Version",null,null,null,null,null,null);
+	   version = query_one("Version",null,null,null,null,null,null).get(0);
 
+   }
+   
+   public int getVersion()
+   {
+   		return Integer.valueOf(version);
    }
    
    public Hashtable<String,String> query_one(String table,String[] columns,String selection,String[] selectionArgs,String groupBy,String having,String orderBy)
@@ -97,6 +104,7 @@ public class MasterDBHelper extends SQLiteOpenHelper {
 		 }
    	return h;
    }
+   
    public List<Hashtable<String,String>> query_many(String table,String[] columns,String selection,String[] selectionArgs,String groupBy,String having,String orderBy)
    {
    	List<Hashtable<String,String>> listH = new ArrayList<Hashtable<String,String>>();
@@ -119,33 +127,42 @@ public class MasterDBHelper extends SQLiteOpenHelper {
    	return listH;
    }
    
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
+   public void UpdateInfoFromServer()throws Exception {
+	   if(((up.Getlab() != up.no) && (up.Getlab() != up.noinet))||((up.GetEquipment() != up.no) && (up.GetEquipment() != up.noinet))||((up.GetSponsor() != up.no) && (up.GetSponsor() != up.noinet)))
+	   		onUpgrade(myDataBase);
+   }
+   
+   public void onUpgrade(SQLiteDatabase db,int oldVersion,int newVersion)
+   {
+	   
+   }
+   
+    public void onUpgrade(SQLiteDatabase db)
     {
     	try{
-    		ArrayList<String> tempString = insertIntoLaboratory();
-		      if (Integer.valueOf(oldVersion) < Integer.valueOf(newVersion)) 
-		      {
-		    	  for(int i = 0; i < tempString.size();i++)
-		    	  {
-		    		  db.execSQL(tempString.get(i));
-		    	  }
-		      }
+    		String sql = "drop table if exists " + "Laboratory";
+            db.execSQL(sql);
+            sql = "drop table if exists " + "Sponsor";
+            db.execSQL(sql);
+            sql = "drop table if exists " + "Equipment";
+            db.execSQL(sql);
+
+            onCreate(db);
+            insertIntoLaboratory(db);
+            insertIntoSponsor(db);
+            insertIntoEquipment(db);
+            
     	}
     	catch(Exception e)
     	{
     		
     	}
 		       
-}
- 
+    }
 
 
-   
-   private ArrayList<String> insertIntoLaboratory()throws Exception
+   private ArrayList<String> insertInto(String values,String[] temp)
    {
-	   String values = "insert into Laboratory(Number, Name,Type , PhoneNumber , Activity ,AverageRating ,ChiefFIO ,LabAssistantsFIOs ,WorkTime ,SponsorName ,Faculty ,Cathedra )  values (";
-	   String[] temp = up.Getlab();
-	   Log.i("mylog",temp[0]);
 	   String val = values;
 	   ArrayList<String> tempString = new ArrayList<String>();
 	   int a = 0;
@@ -157,28 +174,47 @@ public class MasterDBHelper extends SQLiteOpenHelper {
 			   tempString.add(a,val);
 			   val = values; 
 	   }
-		   
 	   return tempString;
    }
+   public void insertIntoLaboratory(SQLiteDatabase db)throws Exception
+   {
+	   String values = "insert into Laboratory(Number, Name,Type , PhoneNumber , Activity ,AverageRating ,ChiefFIO ,LabAssistantsFIOs ,WorkTime ,SponsorName ,Faculty ,Cathedra )  values (";
+	   String[] temp = up.Getlab();
+	  // Log.i("mylog",temp[0]);
+	   ArrayList<String> tempString =  insertInto(values,temp);
+	   
+	   for(int i = 0; i < tempString.size();i++)
+ 	  {
+		   db.execSQL(tempString.get(i));
+ 	  }  
+	  
+   }
    
-   /*private String insertIntoSponsor()throws Exception
+   public void insertIntoSponsor(SQLiteDatabase db)throws Exception
    {
 	   String values = "insert into Sponsor(Name,WebSite , Address ,Telephone  ,Description ) values (";
 	   String[] temp = up.GetSponsor();
-	   return insertInto(values,temp);
+	   ArrayList<String> tempString =  insertInto(values,temp);
+	   
+	   for(int i = 0; i < tempString.size();i++)
+ 	  {
+			db.execSQL(tempString.get(i));
+ 	  }  
    }
    
-   private String insertIntoEquipment()throws Exception
+   public void insertIntoEquipment(SQLiteDatabase db)throws Exception
    {
 	   String values = "insert into Equipment(Number,Electronic,HasProjector,HasWiFi,WiFiName,Tables,Chairs )  values (";
 	   String[] temp = up.GetEquipment();
-	   return insertInto(values,temp);
-   }*/
+	   ArrayList<String> tempString =  insertInto(values,temp);
+	   
+	   for(int i = 0; i < tempString.size();i++)
+ 	  {
+			db.execSQL(tempString.get(i));
+ 	  }  
+   }
     
-    public int getVersion()
-    {
-    	return Integer.valueOf(version);
-    }
+  
 
   
 	

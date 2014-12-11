@@ -62,7 +62,7 @@ public class UpDataAccess
 	String[] noinet = new String[]{"noinet"};
 	boolean estnoinet = false;
 	public UpDataAccess(Context g,String vers){
-		context =g;
+		context = g;
 		version=Integer.parseInt(vers);
 		isOnline( context);
 	}
