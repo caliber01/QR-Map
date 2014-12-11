@@ -220,7 +220,7 @@ public class MasterDBHelper extends SQLiteOpenHelper {
    
    public void insertIntoEquipment(SQLiteDatabase db)throws Exception
    {
-	   String values = "insert into Equipment(Number,Electronic,HasProjector,HasWiFi,WiFiName,Tables,Chairs )  values (";
+	   String values = "insert into LabEquipment(Number,Electronic,HasProjector,HasWiFi,WiFiName,Tables,Chairs )  values (";
 	   String[] temp = up.GetEquipment();
 	   ArrayList<String> tempString =  insertInto(values,temp);
 	   
