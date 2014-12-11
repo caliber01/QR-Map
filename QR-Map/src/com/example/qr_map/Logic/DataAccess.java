@@ -22,6 +22,7 @@ public class DataAccess implements ILabDataAccess
 	private Context conti;
 	private String DbPath = "/data/data/com.example.qr_map/databases/";
 	private final String nameDB = "qr.db";
+	private UpDataAccess up = new UpDataAccess(conti,masterDB.getVersion());
 	
 	public DataAccess()
 	{
@@ -262,11 +263,7 @@ public class DataAccess implements ILabDataAccess
 		// TODO Auto-generated method stub
 
 	}
-	@Override
-	public void UpdateInfoFromServer() {
-		// TODO Auto-generated method stub
-
-	}
+	
 	
 	@Override
 	public int CountAll() {
@@ -283,6 +280,46 @@ public class DataAccess implements ILabDataAccess
 	public int CountHistory() {
 		return this.GetHistory().size();
 	}
-
 	
+	@Override
+	public void UpdateInfoFromServer() {
+		
+
+	}
+
+	/*private String insertInto(String val,String[] temp)throws Exception
+    {
+ 	   String values = val;
+ 	   for(int i = 0;i < temp.length;i++)
+ 	   {
+ 		   if(i == temp.length)
+ 			   values += "'" + temp[i] + "'";
+ 		   else
+ 			   values += "'" + temp[i] + "'" + ",";
+ 	   }
+ 	   values += ");";
+ 	   
+ 	   return values;
+    }
+    
+    private String insertIntoLaboratory()throws Exception
+    {
+ 	   String values = "insert into Laboratory(Number, Name,Type , PhoneNumber , Activity ,AverageRating ,ChiefFIO ,LabAssistantsFIOs ,WorkTime ,SponsorName ,Faculty ,Cathedra )  values (";
+ 	   String[] temp = up.Getlab();
+ 	   return insertInto(values,temp);
+    }
+    
+    private String insertIntoSponsor()throws Exception
+    {
+ 	   String values = "insert into Sponsor(Name,WebSite , Address ,Telephone  ,Description ) values (";
+ 	   String[] temp = up.GetSponsor();
+ 	   return insertInto(values,temp);
+    }
+    
+    private String insertIntoEquipment()throws Exception
+    {
+ 	   String values = "insert into Equipment(Number,Electronic,HasProjector,HasWiFi,WiFiName,Tables,Chairs )  values (";
+ 	   String[] temp = up.GetEquipment();
+ 	   return insertInto(values,temp);
+    }*/
 }

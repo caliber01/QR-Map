@@ -88,7 +88,9 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
         
         //setting nav drawer
         mDrawerToggle = new ActionBarDrawerToggle(
-                this,                 
+                this,                
+                
+                
                 mDrawerLayout,        
                 R.string.app_name,
                 R.string.app_name  
